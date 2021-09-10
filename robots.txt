@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: https://anupjoseph.github.io/sitemap.xml
+Sitemap: https://anupjoseph.github.io/technical-blog//sitemap.xml
 Disallow: /ghost/
 Disallow: /p/
 Disallow: /email/
