@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: https://anupjoseph.github.io/technical-blog//sitemap.xml
+Sitemap: https://anup-blog.netlify.app/sitemap.xml
 Disallow: /ghost/
 Disallow: /p/
 Disallow: /email/
