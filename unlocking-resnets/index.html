@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Opening Resnets</title>
+    <link rel="stylesheet" href="/assets/built/screen.css?v=ef4c3471bf">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,800">
+    <link href="https://unpkg.com/octomments/build/ocs-ui.min.css" rel="stylesheet">
+
+    <script>
+        if (localStorage.getItem('alto_dark') == 'true') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/unlocking-resnets/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://anup-blog.netlify.app/unlocking-resnets/amp/" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Opening Resnets" />
+    <meta property="og:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
+    <meta property="article:published_time" content="2021-09-30T05:26:00.000Z" />
+    <meta property="article:modified_time" content="2021-09-30T05:26:00.000Z" />
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Opening Resnets" />
+    <meta name="twitter:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="413" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Opening Resnets",
+    "url": "https://anup-blog.netlify.app/unlocking-resnets/",
+    "datePublished": "2021-09-30T05:26:00.000Z",
+    "dateModified": "2021-09-30T05:26:00.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/09/resnet.png",
+        "width": 1024,
+        "height": 413
+    },
+    "description": "Step by step exploration on what happens to an image in Resnets\n\nResidual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu\nZhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - \nDeep Residual Learning for Image Recognition\n[https://arxiv.org/pdf/1512.03385.pdf]. Resnets effectively solves the vanishing\ngradient problem for deep networks and the ideas they introduced have been used\nin multiple architectures from there on. \n\nIn a recent assignment I w",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.10.0/umd/portal.min.js" data-ghost="https://anup-blog.netlify.app/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #13ae63;}</style>
+</head>
+
+<body class="post-template">
+    <div class="site">
+        <header class="site-header container">
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="burger hidden-lg hidden-xl"></div>
+            <a class="logo" href="https://anup-blog.netlify.app">
+        <span class="logo-text">Explorations</span>
+</a>            <div class="sep hidden-xs hidden-sm hidden-sm"></div>
+                <nav class="main-menu hidden-xs hidden-sm hidden-md">
+                    <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-home"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/">Home</a></li>
+        <li class="menu-item menu-item-about"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/about/">About</a></li>
+        <li class="menu-item menu-item-collection"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/tag/getting-started/">Collection</a></li>
+        <li class="menu-item menu-item-author"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/author/ghost/">Author</a></li>
+        <li class="menu-item menu-item-portal"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/portal/">Portal</a></li>
+</ul>
+                </nav>
+        </div>
+        <div class="navbar-right">
+            <div class="toggle-track">
+                <div class="toggle-moon"><i class="icon icon-brightness-2"></i></div>
+                <div class="toggle-sun"><i class="icon icon-white-balance-sunny"></i></div>
+                <div class="toggle-thumb"></div>
+            </div>
+        </div>
+    </div>
+</header>        <div class="site-content">
+            
+<div class="content-area">
+    <main class="site-main">
+            <article class="post single-post">
+                <header class="post-header big-title container medium">
+        <h1 class="post-title">Opening Resnets</h1>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-09-30">
+                            Sep 30, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    4 min read
+                </span>
+            </div>
+</header>                    <figure class="post-media container large">
+        <div class="u-placeholder horizontal">
+            <a class="post-image-link" href="/unlocking-resnets/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/09/resnet.png 400w, /content/images/size/w750/2021/09/resnet.png 750w, /content/images/size/w960/2021/09/resnet.png 960w, /content/images/size/w1140/2021/09/resnet.png 1140w, /content/images/size/w1920/2021/09/resnet.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/09/resnet.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Resnet architecture laid down on its side">
+            </a>
+        </div>
+
+                <figcaption>Resnet34 network taken from the <a href="https://arxiv.org/pdf/1512.03385.pdf">original paper</a></figcaption>
+    </figure>
+                <div class="post-content kg-canvas u-text-format">
+                    <p><strong><em>Step by step exploration on what happens to an image in Resnets</em></strong></p><p>Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - <a href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a>. Resnets effectively solves the vanishing gradient problem for deep networks and the ideas they introduced have been used in multiple architectures from there on. </p><p>In a recent assignment I was tasked with understanding how Resnets worked and present the same. I was curious to know what actually happened to an image in Resnet and tried to work out the same. This blog post is the result of that experiment and tries to illustrate the various calculations that happen inside the Resnet architecture.</p><p><em>Before we begin, I am almost certain that this article will have mistakes. I have tried my best to eliminate them. However if you do find any mistake please let me know in the comment or mail personally <a href="mailto:anup20joseph@gmail.com">here</a> and I will fix them as soon as possible.</em></p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><img src="https://anup-blog.netlify.app/content/images/2021/09/network.png" class="kg-image" alt="Resnet architectures input and output respresentations" loading="lazy" width="614" height="276" srcset="https://anup-blog.netlify.app/content/images/size/w600/2021/09/network.png 600w, https://anup-blog.netlify.app/content/images/2021/09/network.png 614w"><figcaption>Resnet architectures</figcaption></figure><p>The Resnet paper,  quite helpfully provides this diagram dividing the network into blocks and showing the output sizes of each block. However this picture might give idea that stride is common through the network from block 2 to 5, which is not the case. We also need to look at the Resnet 34 network given in the paper.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://anup-blog.netlify.app/content/images/2021/09/Architecture-Resnet-34.png" class="kg-image" alt loading="lazy" width="86" height="539"><figcaption>Resnet 34 architecture with residual connections</figcaption></figure><p>This image adds crucial information about strides missing in the earlier image. However this does not have the concise block structures of the earlier image, so I suggest to keep them both at hand. There is one more important bit of information useful in computing the image size. The paper expresses this as </p><p><em>we use identity mapping for all shortcuts and zero-padding for increasing dimensions.</em></p><p>However, I feel that this bit of Python in the (old)Tensorflow implementation of Resnet is a bit more helpful.</p><pre><code class="language-python">padding=('SAME' if strides == 1 else 'VALID')</code></pre><p>This acts as a nice rule for computing through the architecture after block 1 without having to think it through every time. For people wondering what is <em>padding="SAME" </em>and <em>padding="VALID" </em>try this <a href="https://stackoverflow.com/questions/37674306/what-is-the-difference-between-same-and-valid-padding-in-tf-nn-max-pool-of-t">link</a>. Armed with all that info, lets get to work.</p><p>Input image size - (224,224,3)</p><h3 id="block-1-conv1">Block 1: conv1</h3><p>Layer 1: Convolution(filters=64, kernel_size=7x7, strides=2)</p><p>To calculate the output size in a convolution layer we use this formula:</p><!--kg-card-begin: html--><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 542 80" width="542" height="80">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="542" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 155 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">input - kernel_size + 2*padding</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 158.86764805005396 0.6714253277797297)"><path d="M-0.1 0.54 C53.29 0.71, 266.12 0.33, 319.35 0.37 M-1.61 -0.23 C51.73 0.16, 265.21 1.21, 318.58 1.57" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(504 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">+ 1</text></g><g transform="translate(318 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">stride</text></g></svg><!--kg-card-end: html--><p>For the first input the above rule does not apply instead the padding is 2.</p><p>Output size = (224 - 7 + 2 * 2) / 2 + 1 = 111.5 ≈ 112.															</p><p>Final output size of this block = (112x112x64)</p><h3 id="block-2-conv2x">Block 2: conv2_x</h3><p>Layer 1: Maxpool(kernel_size=3x3, strides=2)</p><p>To calculate the output size in a maxpool layer we use this formula</p><!--kg-card-begin: html--><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 407 80" width="407" height="80">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="407" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 91.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">input - kernel_size</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 96.54208162748716 0.4570427794335501)"><path d="M-0.1 0.54 C32.51 0.64, 162.25 -0.03, 194.7 -0.06 M-1.61 -0.23 C30.96 0.08, 161.33 0.85, 193.93 1.14" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(369 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">+ 1</text></g><g transform="translate(218 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">stride</text></g></svg><!--kg-card-end: html--><p>Output size = (112 - 3) / 2+ 1 = 56																				</p><p>Output size = (56x56x64)</p><p>Layer 2: Convolution(filters=64, kernel_size=3x3, strides=1)</p><p>Output size = (56 - 3 + 2 x 1 ) / 1 + 1 = 55.5 ≈ 56</p><p>Output size = (56x6x64)</p><p>There are 5 more Convolution(filters=64, kernel_size=3x3, strides=1) layers. As you can see from the above calculation this does not downsample the image and hence the output size remains the size. Hence the output from this block is (56x56x64).</p><h3 id="block-3-conv3x">Block 3: conv3_x</h3><p>Layer 1: Convolution(filters=128, kernel_size=3x3, strides=2)</p><p>Output size = (56 - 3 + 2 x 0) / 2 + 1 = 27.5 ≈ 28</p><p>Output size = (28x28x128)</p><p>Layer 2: Convolution(filters=128, kernel_size=3x3, strides=1)</p><p>Output size = (28 - 3 + 2 x 1) / 1 + 1 = 28</p><p>Output size = (28x28x128)</p><p>There are 6 more Convolution(filters=128, kernel_size=3x3, strides=1) layers. Again this does not downsample the image and hence the output size remains the size. Hence the output from this block is (28x28x128).</p><h3 id="block-4-conv4x">Block 4: conv4_x</h3><p>Layer 1: Convolution(filters=256, kernel_size=3x3, strides=2)</p><p>Output size = (28 - 3 + 2 x 0) / 2 + 1 = 13.5 ≈ 14</p><p>Output size = (14x14x256)</p><p>Layer 2: Convolution(filters=256, kernel_size=3x3, strides=1)</p><p>Output size = (14 - 3 + 2 x 1) / 1 + 1 = 14</p><p>Output size = (14x14x256)</p><p>There are 10 more Convolution(filters=256, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (14x14x256).</p><h3 id="block-5-conv5x">Block 5: conv5_x</h3><p>Layer 1: Convolution(filters=512, kernel_size=3x3, strides=2)</p><p>Output size = (14 - 3 + 2 x 0) / 2 + 1 = 6.5 ≈ 7</p><p>Output size = (7x7x512)</p><p>Layer 2: Convolution(filters=512, kernel_size=3x3, strides=1)</p><p>Output size = (7 - 3 + 2x1)/1 +1 = 7</p><p>Output size = (7x7x512)</p><p>There are 4 more Convolution(filters=512, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (7x7x512).</p><h3 id="block-5-conv5x-1">Block 5: conv5_x</h3><p>Global average pool is essentially a large classifier which converts the 7x7x512 layer into 1x1x1000 as the Resnet is trained on the ImageNet dataset which has a thousand classes.</p>
+                </div>
+                <div class="container medium">
+                    <div class="share u-hover-wrapper">
+    <a class="share-item share-facebook u-hover-item"
+        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/unlocking-resnets/" target="_blank" rel="noopener"><i
+            class="icon icon-facebook"></i></a>
+    <a class="share-item share-twitter u-hover-item"
+        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/unlocking-resnets/&text=Opening%20Resnets" target="_blank" rel="noopener"><i
+            class="icon icon-twitter"></i></a>
+    <a class="share-item share-linkedin u-hover-item"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/unlocking-resnets/&title=Opening%20Resnets"
+        target="_blank" rel="noopener"><i class="icon icon-linkedin"></i></a>
+    <a class="share-item share-reddit u-hover-item"
+        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/unlocking-resnets/&title=Opening%20Resnets" target="_blank" rel="noopener"><i
+            class="icon icon-reddit"></i></a>
+    <a class="share-item share-telegram u-hover-item"
+        href="https://t.me/share/url?url=https://anup-blog.netlify.app/unlocking-resnets/&text=Opening%20Resnets" target="_blank" rel="noopener"><i
+            class="icon icon-telegram"></i></a>
+</div>                        <section class="author">
+        <div class="author-image-placeholder u-placeholder">
+            <img class="author-image lazyload u-object-fit"
+                data-srcset="/content/images/size/w150/2021/09/anup_avatar.png"
+                src="/content/images/size/w150/2021/09/anup_avatar.png"
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                alt="Anup Joseph">
+        </div>
+        <div class="author-wrapper">
+            <header class="author-header">
+                <div class="author-header-wrapper">
+                    <h4 class="author-name">Anup Joseph</h4>
+                    <div class="author-social">
+                        <a class="author-social-item author-more"
+                            href=/author/anup/>More posts</a>
+                    </div>
+                </div>
+            </header>
+            <div class="author-bio"></div>
+        </div>
+    </section>
+                </div>
+            </article>
+            <div class="navigation container medium">
+
+</div>                            </main>
+</div>
+        </div>
+        <footer class="site-footer container large">
+    <div class="copyright">
+        Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+    </div>
+
+        <nav class="footer-nav">
+            <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-profile"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Profile</a></li>
+        <li class="menu-item menu-item-contact"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/contact/">Contact</a></li>
+</ul>
+        </nav>
+
+    <div class="footer-social">
+            <a class="footer-social-item footer-social-item-facebook" href="https://www.facebook.com/ghost"
+                target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="icon icon-facebook"></i>
+            </a>
+            <a class="footer-social-item footer-social-item-twitter" href="https://twitter.com/ghost"
+                target="_blank" rel="noopener" aria-label="Twitter">
+                <i class="icon icon-twitter"></i>
+            </a>
+        <a class="footer-social-item footer-social-item-rss"
+            href="https://feedly.com/i/subscription/feed/https://anup-blog.netlify.app/rss/" target="_blank" rel="noopener"
+            aria-label="RSS">
+            <i class="icon icon-rss"></i>
+        </a>
+    </div>
+</footer>    </div>
+
+    <div class="dimmer"></div>
+
+    <div class="off-canvas">
+        <div class="canvas-close">
+            <i class="canvas-icon icon icon-window-close"></i>
+        </div>
+        <div class="mobile-menu"></div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+    </script>
+    <script src="/assets/built/main.min.js?v=ef4c3471bf"></script>
+
+    
+
+    
+</body>
+
+</html>
