@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Recreating a Bar Chart Design in Python</title>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/recreating-a-bar-chart-design-in-python/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Recreating a Bar Chart Design in Python" />
+    <meta property="og:description" content="Learn to design a stylish bar chart in Python" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/recreating-a-bar-chart-design-in-python/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/10/1_T5v47mcspkYIcfkrLu9GTw-1.png" />
+    <meta property="article:published_time" content="2021-10-03T13:22:38.000Z" />
+    <meta property="article:modified_time" content="2021-10-05T04:18:15.000Z" />
+    <meta property="article:tag" content="Python" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Recreating a Bar Chart Design in Python" />
+    <meta name="twitter:description" content="Learn to design a stylish bar chart in Python" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/recreating-a-bar-chart-design-in-python/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/10/1_T5v47mcspkYIcfkrLu9GTw-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Python" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="1596" />
+    <meta property="og:image:height" content="1204" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Recreating a Bar Chart Design in Python",
+    "url": "https://anup-blog.netlify.app/recreating-a-bar-chart-design-in-python/",
+    "datePublished": "2021-10-03T13:22:38.000Z",
+    "dateModified": "2021-10-05T04:18:15.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/10/1_T5v47mcspkYIcfkrLu9GTw-1.png",
+        "width": 1596,
+        "height": 1204
+    },
+    "keywords": "Python",
+    "description": "Learn to design a stylish bar chart in Python",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #13ae63;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://anup-blog.netlify.app">
+                Explorations
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Recreating a Bar Chart Design in Python</h1>
+                <section class="post-meta">
+                    Anup Joseph -
+                    <time class="post-date" datetime="2021-10-03">03 Oct 2021</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://anup-blog.netlify.app/content/images/2021/10/1_T5v47mcspkYIcfkrLu9GTw-1.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p><em><em>Credits to </em></em><a href="https://www.linkedin.com/in/alenkagucek/" rel="noopener ugc nofollow"><em><em>Alenka Gucek</em></em></a><em><em> for her orginal design</em></em></p><hr></hr><p>Recently, the Data visualization Stockholm(DVS) meetup group held their first datavis challenge. The dataset for the challenge was snow depth and temperature data from early 20th century to January 2021. The only design constraint was that the visualization had to be black and white.</p><figure class="kg-card kg-gallery-card kg-width-wide kg-card-hascaption"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div><figcaption>Submissions in the Stockholm contest</figcaption></figure><p>The challenge received an amazing variety of great submissions. You can read more about them <a href="https://medium.com/data-visualization-stockholm/data-viz-challenge-1-a288142e8006" rel="noopener">here</a>.</p><p>All of these designs are frankly magnificent. However one design among these stood out to me for its simplicity and elegance. This design was made by <a href="https://twitter.com/alenka_gucek" rel="noopener ugc nofollow">Alenka Gucek</a>, a postdoc researcher at Uppsala university</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Alenka Gucek’s design</figcaption></figure><p>I felt that the most important part of this design is its focus on minimalism and its reusability. This design and its variations in color can be used in a variety of places, essentially wherever bar charts are used. It conveys the information accurately and is interesting and visually pleasing at the same time. Keeping this in mind, I decided to recreate this design as closely as possible. I have tried to make this chart as “templatey” as possible.</p><p>The original design was done in the far fortresses of Excel, Orgin and CorelDraw. I had little to zero knowledge of these tools and so I decided to recreate this plot in Python using the Plotly library.</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div><div class="kg-gallery-image"></div></div></div></figure><p>Now the de facto library for creating visualizations with python is matplotlib. However, I personally find matplotlib a bit unrewarding and kind of overwhelming, so I prefer to use plotly. It has built in interactivity and the overall visual as well as developer experience is great. While not as powerful as matplotlib, its quite good and its almost too easy to get started.</p><p>Here the link to the google colaboratory interactive Jupyter environment and this is the link to the <a href="https://github.com/AnupJoseph/plotly_bar_chart" rel="noopener ugc nofollow">github repo</a>.</p><p></p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://colab.research.google.com/drive/1_DcUOargym-RBgLQfXN0NjXOOCrJa_mT?usp=sharing"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Google Colaboratory</div><div class="kg-bookmark-description"></div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://colab.research.google.com/img/favicon.ico?vrz=colab-20210928-060101-RC00_399406659" alt width="128" height="128" layout="fixed"></amp-img></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://colab.research.google.com/img/colab_favicon_256px.png" alt width="260" height="260" layout="fixed"></amp-img></div></a></figure><p>To get started lets import the python data science essential libraries, numpy and pandas.</p><p>I have also added the datetime libraries and of course, plotly itself.</p><p>The dataset for the challenge can be found in <a href="https://github.com/Dataviz-Stockholm/challenges" rel="noopener ugc nofollow">this repository</a>. Lets import the data and have a look at it. Since by looking at the data on github we already know that the dataset has a time column, I am adding a parse_dates arguement.</p><p>Running a unique check we find that there are some bad values in the dataset which need to be cleaned up.</p><p>Now admittedly since we are interested in the maximum value of the Snow depth the deviations like “-00.02.00” won’t matter much and simply dropping them won’t cause a lot of trouble. But that’s not really a good practice.</p><p>Next, let’s convert the “Snow” column into floats. Since we are interested in the yearly maximum snow depth lets group the dataset in years and find out the maximum snow depth in each year.</p><p>This is the data we need to plot. Now plotly has a system of traces for plotting. Each individual trace is a small component like a<a href="https://plotly.com/python/line-and-scatter/" rel="noopener ugc nofollow"> scatter of points</a> or a <a href="https://plotly.com/python/bar-charts/" rel="noopener ugc nofollow">bar</a>. These components are collectively available under plotly.<a href="https://plotly.com/python/graph-objects/" rel="noopener ugc nofollow">graph_objects</a> and can be combined to create interactive and useful charts.</p><hr></hr><p>My first plan was to use bar charts to make this visualization, specifically the go.Bar class and somehow make the adjacent lines of the bar chart disappear. I quickly realized that this was a terrible plan and plotly doesn’t even allow this to be done. My second idea was to create a scatterplot and join them using lines. This is kind of counter-intuitive and takes a second to wrap your head around it. Imagine it like this,</p><ul><li>A scatterplot has collection of points representing datapoints.</li><li>Now instead of having points, turn each point into small line with a small length.</li><li>Seperate each point by the given length.</li><li>Then join them all together vertically to give an impression of bars.</li></ul><p>Now to make any scatterplot we need two dimensions x and y. We will build y co-ordinates first and then create the corresponding x co-ordinates.</p><p>Since, this is a scatterplot pretending to be a bar chart we need to have two values of each maximum snow depth (Remember the dots getting width thing I rattled off before?). Next we use these y co-ordinates to build our x co-ordinates. I have chosen a width of 5 for each bars but feel free to choose any other.</p><p>Finally our long setup process it done. Lets get started on plotting. We will add one trace of scatterplots with our x and y co-ordinates and set the mode to lines. Plotly will then join each co-ordinate for us. Keeping the in the black and white theme of the challenge lets make the line white and the background dark.</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>basic plot</figcaption></figure><p>This is what our plot looks like at the moment. We are already quite a long way there. For now lets add a title to the plot and remove the grid and axes.</p><figure class="kg-card kg-image-card"></figure><p>The last additions to our plots are the xaxis and yaxis labels. Here plotly’s interactive components come into play.</p><ul><li>Choose the years you want to annotate.</li><li>Find the snow_depth at those years. The snow_max variable will help in this.</li><li>Hover over the graph and find out the snow_depth of your chosen years. Note the corresponding xaxis values in the tooltip.</li><li>Pass these xaxis values to your tickvals variable</li></ul><figure class="kg-card kg-image-card"></figure><p>We need to fix up the tooltip in the graph. At the moment it shows the actual X and Y axis values of the graph on the tooltip. To change that we need to create a array of values we want to display. For every even index in the x_axis let’s add the corresponding years twice.</p><p>The last things left on the plot are annotations. I am deliberately not annotating everything in the plot. However I’ll add an example here.</p><p>Here’s the final interactive version of the plot.</p><p>So that’s all for today. Hope you had as much fun reading the tutorial as I had writing it.</p><p>Thanks to <a href="https://medium.com/@sam99dave" rel="noopener">Samuel Davis</a> and <a href="https://www.linkedin.com/in/darlene-nazareth-b08bb9192/" rel="noopener ugc nofollow">Darlene Nazerath</a> for helping with reviewing the the article and testing the code.<br />Feel free to connect with me on <a href="https://www.linkedin.com/in/anup-joseph/" rel="noopener ugc nofollow">LinkedIn</a>.</p><p></p><p></p><p><br /></p><p></p><p></p><p></p><p></p><p></p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>Explorations</h3>
+            <p>Thoughts, stories, ideas and whatever other random thing came to my mind.</p>
+        <p><a href="https://anup-blog.netlify.app">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>
