@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Make a bar chart with D3 and Svelte</title>
+    <link rel="stylesheet" href="/assets/built/screen.css?v=4c81978e40">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,800">
+    <link href="https://unpkg.com/octomments/build/ocs-ui.min.css" rel="stylesheet">
+
+    <script>
+        if (localStorage.getItem('alto_dark') == 'true') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/amp/" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Make a bar chart with D3 and Svelte" />
+    <meta property="og:description" content="This blog is part of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here .The first chart Curran explores is a simple horizontal bar chart. The data used for the chart is United Nations World Population Prospects data" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/10/bar-chart-style.png" />
+    <meta property="article:published_time" content="2021-10-23T05:00:33.000Z" />
+    <meta property="article:modified_time" content="2021-10-23T05:00:58.000Z" />
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Make a bar chart with D3 and Svelte" />
+    <meta name="twitter:description" content="This blog is part of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here .The first chart Curran explores is a simple horizontal bar chart. The data used for the chart is United Nations World Population Prospects data" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/10/bar-chart-style.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="856" />
+    <meta property="og:image:height" content="619" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Make a bar chart with D3 and Svelte",
+    "url": "https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/",
+    "datePublished": "2021-10-23T05:00:33.000Z",
+    "dateModified": "2021-10-23T05:00:58.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/10/bar-chart-style.png",
+        "width": 856,
+        "height": 619
+    },
+    "description": "&gt; This blog is part of (unofficial) course notes for the Data Visualization with\nReact and D3 [https://www.youtube.com/watch?v&#x3D;2LhoCfjm8R4] series by Curran\nKelleher. Read the introductory blog post here\n[https://anupjoseph.hashnode.dev/series-intro-data-visualization-with-svelte-and-d3] \n.\nThe first chart Curran explores is a simple horizontal bar chart. The data used\nfor the chart is United Nations World Population Prospects data available here\non their website [https://population.un.org/wpp/D",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.10.0/umd/portal.min.js" data-ghost="https://anup-blog.netlify.app/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #13ae63;}</style>
+</head>
+
+<body class="post-template">
+    <div class="site">
+        <header class="site-header container">
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="burger hidden-lg hidden-xl"></div>
+            <a class="logo" href="https://anup-blog.netlify.app">
+        <span class="logo-text">Explorations</span>
+</a>            <div class="sep hidden-xs hidden-sm hidden-sm"></div>
+                <nav class="main-menu hidden-xs hidden-sm hidden-md">
+                    <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-home"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/">Home</a></li>
+        <li class="menu-item menu-item-about"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/about/">About</a></li>
+        <li class="menu-item menu-item-collection"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/collections/">Collection</a></li>
+        <li class="menu-item menu-item-author"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Author</a></li>
+</ul>
+                </nav>
+        </div>
+        <div class="navbar-right">
+            <div class="toggle-track">
+                <div class="toggle-moon"><i class="icon icon-brightness-2"></i></div>
+                <div class="toggle-sun"><i class="icon icon-white-balance-sunny"></i></div>
+                <div class="toggle-thumb"></div>
+            </div>
+        </div>
+    </div>
+</header>        <div class="site-content">
+            
+<div class="content-area">
+    <main class="site-main">
+            <article class="post single-post">
+                <header class="post-header big-title container medium">
+        <h1 class="post-title">Make a bar chart with D3 and Svelte</h1>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-10-23">
+                            Oct 23, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    5 min read
+                </span>
+            </div>
+</header>                    <figure class="post-media container large">
+        <div class="u-placeholder horizontal">
+            <a class="post-image-link" href="/make-a-bar-chart-with-d3-and-svelte-2/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/10/bar-chart-style.png 400w, /content/images/size/w750/2021/10/bar-chart-style.png 750w, /content/images/size/w960/2021/10/bar-chart-style.png 960w, /content/images/size/w1140/2021/10/bar-chart-style.png 1140w, /content/images/size/w1920/2021/10/bar-chart-style.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/10/bar-chart-style.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Make a bar chart with D3 and Svelte">
+            </a>
+        </div>
+
+    </figure>
+                <div class="post-content kg-canvas u-text-format">
+                    <blockquote>This blog is part of (unofficial) course notes for the <a href="https://www.youtube.com/watch?v=2LhoCfjm8R4">Data Visualization with React and D3</a> series by Curran Kelleher. Read the introductory blog post <a href="https://anupjoseph.hashnode.dev/series-intro-data-visualization-with-svelte-and-d3">here</a> .</blockquote><p>The first chart Curran explores is a simple horizontal bar chart. The data used for the chart is United Nations World Population Prospects data available <a href="https://population.un.org/wpp/Download/Standard/Population/">here on their website</a>. I am going to be using a (badly cleaned 😬) slice of the <a href="https://raw.githubusercontent.com/AnupJoseph/svelteLearn/main/charts/bar-chart-svelte/public/data/population_data.csv">data</a> . In and itself, the data doesn't matter too much here. So long as it has atleast one value which we can plot as bars, any data should be useful without too much change.</p><p>To kick of the project, let first make a simple Svelte app. <a href="https://github.com/Rich-Harris/degit">Degit</a> package is a simple way to start building apps with Svelte. Feel free to replace <code>bar-chart</code> with any project name you want.</p><pre><code class="language-Shell">npx degit sveltejs/template bar-chart
+cd bar-chart
+npm install</code></pre><p>This will download a starter Svelte project, build out a folder structure and install the dependencies for Svelte. To use d3, we need to add d3 to our project:</p><pre><code>npm install d3
+</code></pre><p>To run the Svelte app use</p><pre><code>npm run dev
+</code></pre><p>I am going to make a folder called data and save the csv file there. To load data I are going to use the <code>csv</code> utility from d3.</p><pre><code class="language-HTML">&lt;script&gt;
+  import { csv } from "d3";
+  import { onMount } from "svelte";
+
+  let dataset = [];
+  onMount(async () =&gt; {
+    dataset = await csv("data/population_data.csv").then((data) =&gt; {
+      return data.slice(0, 10);
+    });
+  });
+&lt;/script&gt;</code></pre><p>Okay there's more going on here than I promised. First off, I am going to take only a slice of 10 rows from the dataset, rather than taking everything. The <code>onMount</code> function is a lifecycle function from Svelte which runs when the component is first loaded. Now I don't think this is actually required here. Something like</p><pre><code>csv("data/population_data.csv", row).then((data) =&gt; {
+    dataset = data.slice(0, 10);
+  });
+</code></pre><p>works just fine. <code>onMount</code> just looked like a convenient place to do the data loading work.</p><p>Now I am only going to plot the population for only the year 2020. So I am going to select that as a separate column. <a href="https://d3-wiki.readthedocs.io/zh_CN/master/CSV/">d3.csv</a> only provides the output as strings. We need to convert those into numbers. Fortunately the csv method has support for an accessor function which can be used to do the necessary preprocessing.</p><pre><code>const row = function (data) {
+    data["Population"] = +data["2020"] * 1000;  // + here is the unary conversion operator
+    return data;
+  };
+onMount(async () =&gt; {
+    dataset = await csv("data/population_data.csv", row).then((data) =&gt; {
+      return data.slice(0, 10);
+    });
+  });</code></pre><p>The population figures are in millions, so the multiply by thousand.<br>In D3 we generally use SVG to render our graphics. Let's define a height and a width for our SVG and provide it with a few margins as well.<br></p><pre><code>const margin = { top: 20, bottom: 20, left: 20, right: 20 };
+const width = 840,
+    height = 60
+![bar-chart-middle.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1633758156708/v8jXQ1221.png)
+;
+</code></pre><p>And finally let's plot the svg.<br></p><pre><code>&lt;main&gt;
+  &lt;svg {width} {height}&gt;&lt;/svg&gt;
+&lt;/main&gt;
+</code></pre><blockquote>In case you are wondering why we are not writing <code>width={width}</code> sort of syntax, then that's <a href="https://svelte.dev/tutorial/dynamic-attributes">Svelte's shorthand for attributes</a></blockquote><p>At the moment of course, there's nothing on the browser to see. Let's start changing that. Bar charts are essentially a bunch of rectangles arranged nicely. SVG has a <code>rect</code> block which can be used for this purpose. We need to create one reactangle for each element in our array.<br></p><pre><code>&lt;svg {width} {height}&gt;
+    {#each dataset as data, i}
+      &lt;rect width={width} height={10} /&gt;
+    {/each}
+  &lt;/svg&gt;
+</code></pre><p>This is Svelte's <code>{#each}</code> block which is essentially a forEach which can render html. For now we'll ignore the height and width of the rect. This is what we get at the moment</p><figure class="kg-card kg-image-card"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--SzwqGMBD--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn.hashnode.com/res/hashnode/image/upload/v1633667643656/xZjtuVbpN.png" class="kg-image" alt="bar-chart-start.png" loading="lazy"></figure><p>It might look like only one bar but the Element inspector will show that there are 10 of them overlapping each other. To shift the bars down and to resize the bars we need to use the concept of <a href="https://www.d3indepth.com/scales/">scales</a>. More specifically we need the <a href="https://github.com/d3/d3-scale#band-scales">scaleBand</a> and <a href="https://github.com/d3/d3-scale#linear-scales">scaleLinear</a> functions from d3.<br></p><pre><code>const yScale = scaleBand()
+    .domain(dataset.map((d) =&gt; d["Location"]))
+    .range([0, height]);
+
+const xScale = scaleLinear()
+    .domain([0, max(dataset, (d) =&gt; d.Population)])
+    .range([0, width]);
+</code></pre><p>Let's now change the rect tag to reflect this updated scales.<br></p><pre><code>&lt;rect
+        x={0}
+        y={yScale(data.Location)}
+        width={xScale(data.Population)}
+        height={yScale.bandwidth()}
+/&gt;
+</code></pre><p>There we go. The browser reloads and .... it does not work!!! You refresh again hoping that maybe Svelte is a bit slow to update but the browser remains the same empty blank sheet it was 10 mins ago. In despair you turn to the inspector and it says nope width cannot be "NaN".</p><p>This is a pretty surprising error as the code you wrote seems pretty reasonable. The thing I forgot here is that csv is being processed asynchronously. So when <code>xScale</code> and <code>yScale</code> are being processed they are working on empty arrays. The dataset array changes on the way and we need our <code>xScale</code> and <code>yScale</code> to react to that change. This seemed like a perfect case for using <a href="https://medium.com/geekculture/lets-talk-about-state-management-in-svelte-e4a59057b990">Svelte state</a> . Let's change the <code>const</code> to <code>$:</code>.<br></p><pre><code>$: yScale = scaleBand()
+    .domain(dataset.map((d) =&gt; d["Location"]))
+    .range([0, height]);
+
+$: xScale = scaleLinear()
+   .domain([0, max(dataset, (d) =&gt; d.Population)])
+   .range([0, width]);
+</code></pre><p>And that works. There we have it. A perfectly horrible looking bar chart.</p><figure class="kg-card kg-image-card"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--wqv6-6UR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn.hashnode.com/res/hashnode/image/upload/v1633758177181/kB24Losi1.png" class="kg-image" alt="bar-chart-middle.png" loading="lazy"></figure><p>Now while, I love the stark simplicity and gravity if this bar chart, I am being told that this is simply not enough for this to be a multi-million dollar NFT. Let's clean this up a bit, add some spacing between the bars and some color to the chart<br></p><pre><code>$: yScale = scaleBand()
+    .domain(dataset.map((d) =&gt; d["Location"]))
+    .range([0, height])
+    .paddingInner(0.15);
+&lt;style&gt;
+  rect {
+    fill: #13293d;
+  }
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--lI1kpgQV--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn.hashnode.com/res/hashnode/image/upload/v1633758977228/iFrejV35_Q.png" class="kg-image" alt="bar-chart-style.png" loading="lazy"></figure><p>That is a bit better. Let's add some transitions because its so easy to do so in Svelte. grab the fly transition from Svelte.<br></p><pre><code>import { fly } from "svelte/transition";
+</code></pre><p>And modify the rect block as follows.<br></p><pre><code>{#each dataset as data, i}
+      &lt;rect
+        x={0}
+        y={yScale(data.Location)}
+        width={xScale(data.Population)}
+        height={yScale.bandwidth()}
+        in:fly={{ x: -200, duration: 1000, delay: i * 50 }}
+      /&gt;
+{/each}
+</code></pre><figure class="kg-card kg-image-card"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--dlHhZSX1--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://cdn.hashnode.com/res/hashnode/image/upload/v1633760004389/iMMArhsEb.gif" class="kg-image" alt="bar-chart-cut.gif" loading="lazy"></figure><p>Here is the whole code for the graph.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://gist.github.com/AnupJoseph/efda2eed51802c5cd9ef21f3a9a0cee8"><div class="kg-bookmark-content"><div class="kg-bookmark-title">bar-chart-with-transitions.svelte</div><div class="kg-bookmark-description">GitHub Gist: instantly share code, notes, and snippets.</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://gist.github.com/fluidicon.png" alt=""><span class="kg-bookmark-author">Gist</span><span class="kg-bookmark-publisher">262588213843476</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://github.githubassets.com/images/modules/gists/gist-og-image.png" alt=""></div></a></figure><p>That's all for today. Hope you had fun reading this!!</p><p>Thanks to <a href="https://twitter.com/currankelleher?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">Curran Kelleher</a> for creating this amazing <a href="https://www.youtube.com/watch?v=2LhoCfjm8R4">course</a></p><p>P.S. If you want a more complete example with title and axes and styling, look <a href="https://github.com/AnupJoseph/svelteLearn/tree/main/charts/bar-chart-svelte">here</a></p><p></p>
+                </div>
+                <div class="container medium">
+                    <div class="share u-hover-wrapper">
+    <a class="share-item share-facebook u-hover-item"
+        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/" target="_blank" rel="noopener"><i
+            class="icon icon-facebook"></i></a>
+    <a class="share-item share-twitter u-hover-item"
+        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/&text=Make%20a%20bar%20chart%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-twitter"></i></a>
+    <a class="share-item share-linkedin u-hover-item"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/&title=Make%20a%20bar%20chart%20with%20D3%20and%20Svelte"
+        target="_blank" rel="noopener"><i class="icon icon-linkedin"></i></a>
+    <a class="share-item share-reddit u-hover-item"
+        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/&title=Make%20a%20bar%20chart%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-reddit"></i></a>
+    <a class="share-item share-telegram u-hover-item"
+        href="https://t.me/share/url?url=https://anup-blog.netlify.app/make-a-bar-chart-with-d3-and-svelte-2/&text=Make%20a%20bar%20chart%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-telegram"></i></a>
+</div>                        <section class="author">
+        <div class="author-image-placeholder u-placeholder">
+            <img class="author-image lazyload u-object-fit"
+                data-srcset="/content/images/size/w150/2021/09/anup_avatar.png"
+                src="/content/images/size/w150/2021/09/anup_avatar.png"
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                alt="Anup Joseph">
+        </div>
+        <div class="author-wrapper">
+            <header class="author-header">
+                <div class="author-header-wrapper">
+                    <h4 class="author-name">Anup Joseph</h4>
+                    <div class="author-social">
+                        <a class="author-social-item author-more"
+                            href=/author/anup/>More posts</a>
+                    </div>
+                </div>
+            </header>
+            <div class="author-bio"></div>
+        </div>
+    </section>
+                </div>
+            </article>
+            <div class="navigation container medium">
+        <div class="navigation-item navigation-previous">
+            <a class="navigation-item-link button-arrow button-arrow-left" href="/series-intro-data-visualization-with-svelte-and-d3/">
+                <i class="button-arrow-icon icon icon-arrow-left"></i> Previous Post
+            </a>
+        </div>
+
+        <div class="navigation-item navigation-next">
+            <a class="navigation-item-link button-arrow button-arrow-right" href="/make-a-scatter-plot-with-svelte-and-d3/">
+                Next Post <i class="button-arrow-icon icon icon-arrow-right"></i>
+            </a>
+        </div>
+</div>                        <div class="comment-container">
+    <div class="comment container medium">
+        <script src="https://utteranc.es/client.js"
+        repo="technical-blog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async> </script>
+    </div>
+</div>    </main>
+</div>
+        </div>
+        <footer class="site-footer container large">
+    <div class="copyright">
+        Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+    </div>
+
+        <nav class="footer-nav">
+            <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-profile"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Profile</a></li>
+        <li class="menu-item menu-item-contact"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/contact/">Contact</a></li>
+</ul>
+        </nav>
+
+    <div class="footer-social">
+            <a class="footer-social-item footer-social-item-facebook" href="https://www.facebook.com/ghost"
+                target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="icon icon-facebook"></i>
+            </a>
+            <a class="footer-social-item footer-social-item-twitter" href="https://twitter.com/ghost"
+                target="_blank" rel="noopener" aria-label="Twitter">
+                <i class="icon icon-twitter"></i>
+            </a>
+        <a class="footer-social-item footer-social-item-rss"
+            href="https://feedly.com/i/subscription/feed/https://anup-blog.netlify.app/rss/" target="_blank" rel="noopener"
+            aria-label="RSS">
+            <i class="icon icon-rss"></i>
+        </a>
+    </div>
+</footer>    </div>
+
+    <div class="dimmer"></div>
+
+    <div class="off-canvas">
+        <div class="canvas-close">
+            <i class="canvas-icon icon icon-window-close"></i>
+        </div>
+        <div class="mobile-menu"></div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+    </script>
+    <script src="/assets/built/main.min.js?v=4c81978e40"></script>
+
+    
+
+    
+</body>
+
+</html>

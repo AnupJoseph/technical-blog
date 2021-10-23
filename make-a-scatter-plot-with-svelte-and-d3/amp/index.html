@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Make a scatter plot with Svelte and D3</title>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Make a scatter plot with Svelte and D3" />
+    <meta property="og:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a scatter plot based on the Iris Flowers Dataset. I figured we could reuse" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" />
+    <meta property="article:published_time" content="2021-10-23T05:06:23.000Z" />
+    <meta property="article:modified_time" content="2021-10-23T05:06:23.000Z" />
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Make a scatter plot with Svelte and D3" />
+    <meta name="twitter:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a scatter plot based on the Iris Flowers Dataset. I figured we could reuse" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="938" />
+    <meta property="og:image:height" content="618" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Make a scatter plot with Svelte and D3",
+    "url": "https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/",
+    "datePublished": "2021-10-23T05:06:23.000Z",
+    "dateModified": "2021-10-23T05:06:23.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png",
+        "width": 938,
+        "height": 618
+    },
+    "description": "&gt; This blog is second in a series of (unofficial) course notes for the Data\nVisualization with React and D3 series by Curran Kelleher. Read the introductory\nblog post here\n[https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07]\n.\nThe next chart in the series is a scatter plot based on the Iris Flowers Dataset\n[https://archive.ics.uci.edu/ml/datasets/iris]. I figured we could reuse a lot\nof the code from earlier examples than rewiriting everything from scratch. A\nproperl",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #13ae63;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://anup-blog.netlify.app">
+                Explorations
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Make a scatter plot with Svelte and D3</h1>
+                <section class="post-meta">
+                    Anup Joseph -
+                    <time class="post-date" datetime="2021-10-23">23 Oct 2021</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a scatter plot based on the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Flowers Dataset</a>. I figured we could reuse a lot of the code from earlier examples than rewiriting everything from scratch. A properly cleaned version of the dataset by Curran is available <a href="https://gist.githubusercontent.com/curran/9e04ccfebeb84bcdc76c/raw/3d0667367fce04e8ca204117c290c42cece7fde0/iris.csv">here</a>.The dataset has four numerical columns namely <code>sepal_length,sepal_width,petal_length,petal_width</code> which we need to convert to numbers. Let's change the <code>row</code> and <code>onMount</code> functions to reflect this:<br /></p><pre><code>const  row  =  function  (data)  {
+    data.sepal_length  =  +data.sepal_length;
+    data.sepal_width  =  +data.sepal_width;
+    data.petal_length  =  +data.petal_length;
+    data.petal_width  =  +data.petal_width;
+
+    return data;
+};
+
+onMount(async  ()  =&gt; {
+
+    dataset  =  await  csv(
+"https://gist.githubusercontent.com/curran/9e04ccfebeb84bcdc76c/raw/3d0667367fce04e8ca204117c290c42cece7fde0/iris.csv",
+    row
+    ).then((data)  =&gt; {
+        return  data;
+    });
+});
+</code></pre><blockquote>in case you are wondering where this code came from, look up this <a href="https://gist.github.com/AnupJoseph/efda2eed51802c5cd9ef21f3a9a0cee8">gist</a></blockquote><p>The <code>scaleBand</code> logic we used before doesn't make much sense in a scatter plot so we need to change that to <code>scaleLinear</code>. I am going to plot <code>petal_width</code> on X-axis and <code>petal_length</code> on Y-axis and so let's change the domain of <code>xScale</code> and <code>yScale</code> respectively. Again doesn't matter too much, so feel free to change the X and Y axes to your liking<br /></p><pre><code>$: xScale  =  scaleLinear()
+    .domain(extent(dataset, (d)  =&gt;  d.petal_width))
+    .range([0, width]); 
+
+$: yScale  =  scaleLinear()
+    .domain(extent(dataset, (d)  =&gt;  d.petal_length))
+    .range([0, height]);
+</code></pre><p>To make the dots for the scatter plot we can make use of the <code>&lt;circle&gt;</code> SVG tag. in the plotting logic let's replace the <code>&lt;rect&gt;</code> tag by <code>circle</code> and specify its attributes appropriately.<br /></p><pre><code>&lt;circle
+    cx={xScale(data.petal_width)}
+    cy={yScale(data.petal_length)}
+    r="5"
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--oEqRneUH--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9mlldez3uzpzxiqksljo.png" class="kg-image" alt="scatter-basic" width="814" height="633" layout="responsive"></amp-img></figure><p>Something you probably noticed here is that some dots appear to be cutoff from the SVG. The solution I can think of is to shift all the circles to the left. So I am going to wrap all the circles in a <code>&lt;g&gt;</code> apply the <code>transform</code> directive on it. Lets use the margins that we initialized way back before to translate it across:<br /></p><pre><code>&lt;g  transform={`translate(${margin.left},${margin.right})`}&gt;
+    {#each  dataset  as data, i}
+        &lt;circle
+        cx={xScale(data.petal_width)}
+        cy={yScale(data.petal_length)}
+        r="5"
+        /&gt;
+    {/each}
+&lt;/g&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--KMYNwSce--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mn4nfxghcljxk19rl5ul.png" class="kg-image" alt="scatter-cropped" width="880" height="672" layout="responsive"></amp-img></figure><p>I am also going to reconfigure the scales so that we have more space to work with at the bottom of the page and left.<br /></p><pre><code>const  innerHeight  =  height  -  margin.top  -  margin.bottom,
+innerWidth  =  width  -  margin.left  -  margin.right;
+
+$: xScale  =  scaleLinear()
+    .domain(extent(dataset, (d)  =&gt;  d.petal_width))
+    .range([0, innerWidth]);
+
+$: yScale  =  scaleLinear()
+    .domain(extent(dataset, (d)  =&gt;  d.petal_length))
+    .range([0, innerHeight]);
+</code></pre><p>The Iris flowers in this dataset are of three different species. I think it makes sense to represent them with different colors. I am going to map an array of colors to the species using the <code>scaleOrdinal</code> function in D3.<br /></p><pre><code>const classSet = new Set(dataset.map((d) =&gt; d.class));
+$: colorScale = scaleOrdinal()
+    .domain(classSet)
+    .range(["#003049", "#d62828", "#f77f00"]);
+</code></pre><p>And then change the <code>&lt;circle&gt;</code> element as follows:<br /></p><pre><code>&lt;circle
+    cx={xScale(data.petal_width)}
+    cy={yScale(data.petal_length)}  
+    r="5"
+    style={`fill:${colorScale(data.class)}`}
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--1uY8NmLG--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fq4ej7ctgp9rc3dmsyrc.png" class="kg-image" alt="scatter-colored" width="880" height="601" layout="responsive"></amp-img></figure><p>I think I'll make this a (slightly) more fully fleshed out chart and add labels and axes. First lets add x and y-axis labels. Labels are ofcourse just <code>&lt;text&gt;</code> elements.<br />We add the Y-axis label as follows:<br /></p><pre><code>&lt;text  transform={`translate(${-25},${innerHeight  /  2}) rotate(-90)`}
+&gt;Petal Length&lt;/text&gt;
+</code></pre><p>That cryptic transform essentially just shifts to the left of all the circles and then rotate it. The Y-axis label is added as follows:<br /></p><pre><code>&lt;text  x={innerWidth  /  2  }  y={innerHeight  +  30}&gt;Petal Width&lt;/text&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--nJAZFyOM--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kfamnx4ps3kcc5d7ez2w.png" class="kg-image" alt="scatter-colored-axes" width="880" height="603" layout="responsive"></amp-img></figure><p><br />Let's add an X-axis and Y-axis. We could write our own Axis component but I saw a nice reusable axis component that I quite liked <a href="https://github.com/TomFevrier/svelte-d3-demo/blob/master/src/Axis.svelte">here</a>. I am going to make a few changes there and use it.<br /></p><pre><code>&lt;script&gt;
+
+    import { select, selectAll } from  "d3-selection";
+    import { axisBottom, axisLeft } from  "d3-axis";
+
+
+    export let  innerHeight;
+    export let  margin;
+    export let  position;
+    export let  scale;
+
+
+
+    let  transform;
+    let  g;
+
+    $: {
+
+        select(g).selectAll("*").remove();
+
+        let  axis;
+        switch (position) {
+            case  "bottom":
+                axis  =  axisBottom(scale).tickSizeOuter(0);
+                transform  =  `translate(0, ${innerHeight})`;
+                break;
+
+            case  "left":
+
+                axis  =  axisLeft(scale).tickSizeOuter(0);
+                transform  =  `translate(${margin}, 0)`;
+    }
+    select(g).call(axis);
+}
+&lt;/script&gt;
+
+&lt;g  class="axis"  bind:this={g}  {transform} /&gt;
+</code></pre><p>Finally lets import the axis component and add it in the <code>&lt;g&gt;</code> element like so:<br /></p><pre><code>&lt;Axis  {innerHeight}  {margin}  scale={xScale}  position="bottom" /&gt;
+&lt;Axis  {innerHeight}  {margin}  scale={yScale}  position="left" /&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--4h-90nFS--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uq38prlrdadzvuu1huki.png" class="kg-image" alt="Scatter plot with axes" width="880" height="581" layout="responsive"></amp-img></figure><p>Yeah the Y-axis is inverted 😬. Turns out I have doing this a bit wrong. For the record, I did wonder how such thin petals were so long. But then again what do I know about Iris flowers. Fixing this is easy enough. Let's change <code>yScale</code> as follows:<br /></p><pre><code>$: yScale  =  scaleLinear()
+    .domain(extent(dataset, (d)  =&gt;  d.petal_length))
+    .range([innerHeight, 0]);
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--QYVBs6Uo--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e32ylc7fi6fblv0tzynv.png" class="kg-image" alt="Image description" width="880" height="580" layout="responsive"></amp-img></figure><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://gist.github.com/AnupJoseph/27a5f91d4a1ae6fae0b51cbe4394debd#file-axis-svelte"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Scatter plot with D3 and Svelte</div><div class="kg-bookmark-description">Scatter plot with D3 and Svelte. GitHub Gist: instantly share code, notes, and snippets.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://gist.github.com/fluidicon.png" alt width="512" height="512" layout="responsive"></amp-img><span class="kg-bookmark-author">Gist</span><span class="kg-bookmark-publisher">262588213843476</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://github.githubassets.com/images/modules/gists/gist-og-image.png" alt width="1280" height="640" layout="responsive"></amp-img></div></a></figure><p>If you want a simple scatter plot then this is probably all you need. I actually went on to add some more (completely unecessary) styling to it. I wanted to see if for each species of the flower we could have different shaped-petals. Not Iris petals shapes of course but petals nonetheless.</p><p>So I gathered some petal shapes from a <a href="https://frontendmasters.com/courses/d3-js-react/">FrontendMasters</a> workshop by Shirley Wu <a href="https://observablehq.com/@sxywu/workshop-utility-functions#petalPaths">here</a>, modified them ever so slightly and saved as <code>paths.js</code><br /></p><pre><code>export const  petalPaths  =  [
+    'M0 0 C5 5 5 10 0 10 C-5 10 -5 5 0 0',
+    'M-3.5 0 C-2.5 2.5 2.5 2.5 3.5 0 C5 2.5 2.5 7.5 0 10 C-2.5 7.5 -5.0 2.5 -3.5 0',
+    'M0 0 C5 2.5 5 7.5 0 10 C-5 7.5 -5 2.5 0 0'
+]
+</code></pre><p>Let's import the <code>petalpaths</code> and map them to species using D3 <code>scaleOrdinal</code>.<br /></p><pre><code>import { petalPaths } from  "./paths";
+$: shapeScale  =  scaleOrdinal().domain(classSet).range(petalPaths);
+</code></pre><p>Finally instead of plotting circles, we plot a <code>&lt;path&gt;</code> element and set the d attribute to <code>shapeScale</code>.<br /></p><pre><code>&lt;path
+    d={shapeScale(data.class)}
+    fill={`${colorScale(data.class)}`}
+/&gt;
+</code></pre><p>We wrap it in a <code>&lt;g&gt;</code> element and translate it to their respective position so that they dont overlap each other.<br /></p><pre><code>&lt;g
+
+    transform={`translate(${xScale(data.petal_width)},${
+    yScale(data.petal_length)  -  5
+    })`}
+    &gt;
+    &lt;path
+    d={shapeScale(data.class)}
+    fill={`${colorScale(data.class)}`}
+    /&gt;
+&lt;/g&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://res.cloudinary.com/practicaldev/image/fetch/s--s8qTLT0R--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4y8jnqfmd1nrd2itn353.png" class="kg-image" alt="Scatter plot with Shapes" width="880" height="589" layout="responsive"></amp-img></figure><p>I love this plot!<br />One thing to notice here however is that the plot does loose some accuracy on adding the shapes. So if that's an important concern then best stay away from it. Anyway, I think I'll end here.<br />Here's the full code -</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://gist.github.com/AnupJoseph/44057936917ead0fa565dc6fb1448138"><div class="kg-bookmark-content"><div class="kg-bookmark-title">App.svelte</div><div class="kg-bookmark-description">GitHub Gist: instantly share code, notes, and snippets.</div><div class="kg-bookmark-metadata"><amp-img class="kg-bookmark-icon" src="https://gist.github.com/fluidicon.png" alt width="512" height="512" layout="responsive"></amp-img><span class="kg-bookmark-author">Gist</span><span class="kg-bookmark-publisher">262588213843476</span></div></div><div class="kg-bookmark-thumbnail"><amp-img src="https://github.githubassets.com/images/modules/gists/gist-og-image.png" alt width="1280" height="640" layout="responsive"></amp-img></div></a></figure><p>So that's it for today. Have a nice day!</p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>Explorations</h3>
+            <p>Thoughts, stories, ideas and whatever other random thing came to my mind.</p>
+        <p><a href="https://anup-blog.netlify.app">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>

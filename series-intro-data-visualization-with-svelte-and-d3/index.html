@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Series Intro: Data Visualization With Svelte and D3</title>
+    <link rel="stylesheet" href="/assets/built/screen.css?v=4c81978e40">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,800">
+    <link href="https://unpkg.com/octomments/build/ocs-ui.min.css" rel="stylesheet">
+
+    <script>
+        if (localStorage.getItem('alto_dark') == 'true') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/amp/" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Series Intro: Data Visualization With Svelte and D3" />
+    <meta property="og:description" content="Curran Kelleher&#x27;s Data Visualization With React and D3 is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about D3 and data visualization in general. While I have worked with Python libraries like Matplotlib , Seaborn and Plotly and they are fantastic for" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png" />
+    <meta property="article:published_time" content="2021-10-23T04:37:01.000Z" />
+    <meta property="article:modified_time" content="2021-10-23T04:37:01.000Z" />
+    <meta property="article:tag" content="Svelte" />
+    <meta property="article:tag" content="Javascript" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Series Intro: Data Visualization With Svelte and D3" />
+    <meta name="twitter:description" content="Curran Kelleher&#x27;s Data Visualization With React and D3 is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about D3 and data visualization in general. While I have worked with Python libraries like Matplotlib , Seaborn and Plotly and they are fantastic for" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Svelte, Javascript" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Series Intro: Data Visualization With Svelte and D3",
+    "url": "https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/",
+    "datePublished": "2021-10-23T04:37:01.000Z",
+    "dateModified": "2021-10-23T04:37:01.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png",
+        "width": 1920,
+        "height": 1080
+    },
+    "keywords": "Svelte, Javascript",
+    "description": "Curran Kelleher&#x27;s Data Visualization With React and D3\n[https://www.youtube.com/watch?v&#x3D;2LhoCfjm8R4]is probably the most comprehensive\ncourse on D3 on the Internet. For some time I have been curious about D3\n[https://d3js.org/] and data visualization in general. While I have worked with\nPython libraries like Matplotlib [https://matplotlib.org/] , Seaborn\n[https://seaborn.pydata.org/] and Plotly [https://plotly.com/] and they are\nfantastic for most kinds of exploratory and scientifc plots they ha",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.10.0/umd/portal.min.js" data-ghost="https://anup-blog.netlify.app/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #13ae63;}</style>
+</head>
+
+<body class="post-template tag-svelte tag-javascript">
+    <div class="site">
+        <header class="site-header container">
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="burger hidden-lg hidden-xl"></div>
+            <a class="logo" href="https://anup-blog.netlify.app">
+        <span class="logo-text">Explorations</span>
+</a>            <div class="sep hidden-xs hidden-sm hidden-sm"></div>
+                <nav class="main-menu hidden-xs hidden-sm hidden-md">
+                    <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-home"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/">Home</a></li>
+        <li class="menu-item menu-item-about"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/about/">About</a></li>
+        <li class="menu-item menu-item-collection"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/collections/">Collection</a></li>
+        <li class="menu-item menu-item-author"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Author</a></li>
+</ul>
+                </nav>
+        </div>
+        <div class="navbar-right">
+            <div class="toggle-track">
+                <div class="toggle-moon"><i class="icon icon-brightness-2"></i></div>
+                <div class="toggle-sun"><i class="icon icon-white-balance-sunny"></i></div>
+                <div class="toggle-thumb"></div>
+            </div>
+        </div>
+    </div>
+</header>        <div class="site-content">
+            
+<div class="content-area">
+    <main class="site-main">
+            <article class="post tag-svelte tag-javascript single-post">
+                <header class="post-header big-title container medium">
+        <h1 class="post-title">Series Intro: Data Visualization With Svelte and D3</h1>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-10-23">
+                            Oct 23, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    2 min read
+                </span>
+                    <span class="post-meta-item post-meta-tags">
+                        <a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a><a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a>
+                    </span>
+            </div>
+</header>                    <figure class="post-media container large">
+        <div class="u-placeholder horizontal">
+            <a class="post-image-link" href="/series-intro-data-visualization-with-svelte-and-d3/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/10/Series-logo.png 400w, /content/images/size/w750/2021/10/Series-logo.png 750w, /content/images/size/w960/2021/10/Series-logo.png 960w, /content/images/size/w1140/2021/10/Series-logo.png 1140w, /content/images/size/w1920/2021/10/Series-logo.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/10/Series-logo.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Series Intro: Data Visualization With Svelte and D3">
+            </a>
+        </div>
+
+                <figcaption>A random series logo I just made up</figcaption>
+    </figure>
+                <div class="post-content kg-canvas u-text-format">
+                    <p>Curran Kelleher's <a href="https://www.youtube.com/watch?v=2LhoCfjm8R4">Data Visualization With React and D3 </a>is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about <a href="https://d3js.org/">D3</a> and data visualization in general. While I have worked with Python libraries like <a href="https://matplotlib.org/">Matplotlib</a> , <a href="https://seaborn.pydata.org/">Seaborn</a> and <a href="https://plotly.com/">Plotly</a> and they are fantastic for most kinds of exploratory and scientifc plots they have limitations on the web particularly in terms of interactivity. D3, for the uinitiated is the library which powers the bulk of all the interactive and SVG based plots on the web. It also acts as underlying low-level library for a lot of higher level libraries including Vega(For a more comprehensive list look <a href="https://github.com/wbkd/awesome-d3#charts">here</a> ).</p><p>In the series Curran uses D3 with React. However I personally find React impenetrable magic.</p><figure class="kg-card kg-image-card"><img src="https://anup-blog.netlify.app/content/images/2021/10/image-3.png" class="kg-image" alt loading="lazy" width="642" height="347" srcset="https://anup-blog.netlify.app/content/images/size/w600/2021/10/image-3.png 600w, https://anup-blog.netlify.app/content/images/2021/10/image-3.png 642w"></figure><p>Its also not very convenient to use with D3 as both access the DOM and accessing DOM directly in React is always a risky business. I found <a href="https://svelte.dev/">Svelte's </a>style of thinking really refreshing and intuitive. Svelte is a radical new approach to building user interfaces. Its essentially a compiler which takes <code>.svelte</code> files , which are components including HTML, CSS and JS required for the component to run and turns them into fast, lighweight code which can be executed in the browser.</p><p>So I am using Svelte instead of React for building the components. Also this series is not a tutorial on either D3 or Svelte. At best this can be thought of as course notes for my self to follow along with Curran's course. The only reason this is a series is because Hashnode allows to organize as series. As the series progress and more articles get added I'll add them to the end of this post.</p><p>P.S. I am not very good at either D3 and Svelte (Coming to think of it not very good at JS either 😢). The code will probably be full of errors, atrocious bad practices and horrible inefficiencies. Be kind enough to point out in the comments if you notice any such in a constructive manner.</p><p>That's all now. Hope you have a good day!</p><p></p>
+                </div>
+                <div class="container medium">
+                    <div class="share u-hover-wrapper">
+    <a class="share-item share-facebook u-hover-item"
+        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" target="_blank" rel="noopener"><i
+            class="icon icon-facebook"></i></a>
+    <a class="share-item share-twitter u-hover-item"
+        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&text=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+            class="icon icon-twitter"></i></a>
+    <a class="share-item share-linkedin u-hover-item"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&title=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3"
+        target="_blank" rel="noopener"><i class="icon icon-linkedin"></i></a>
+    <a class="share-item share-reddit u-hover-item"
+        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&title=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+            class="icon icon-reddit"></i></a>
+    <a class="share-item share-telegram u-hover-item"
+        href="https://t.me/share/url?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&text=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+            class="icon icon-telegram"></i></a>
+</div>                        <section class="author">
+        <div class="author-image-placeholder u-placeholder">
+            <img class="author-image lazyload u-object-fit"
+                data-srcset="/content/images/size/w150/2021/09/anup_avatar.png"
+                src="/content/images/size/w150/2021/09/anup_avatar.png"
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                alt="Anup Joseph">
+        </div>
+        <div class="author-wrapper">
+            <header class="author-header">
+                <div class="author-header-wrapper">
+                    <h4 class="author-name">Anup Joseph</h4>
+                    <div class="author-social">
+                        <a class="author-social-item author-more"
+                            href=/author/anup/>More posts</a>
+                    </div>
+                </div>
+            </header>
+            <div class="author-bio"></div>
+        </div>
+    </section>
+                </div>
+            </article>
+            <div class="navigation container medium">
+        <div class="navigation-item navigation-previous">
+            <a class="navigation-item-link button-arrow button-arrow-left" href="/recreating-a-bar-chart-design-in-python/">
+                <i class="button-arrow-icon icon icon-arrow-left"></i> Previous Post
+            </a>
+        </div>
+
+        <div class="navigation-item navigation-next">
+            <a class="navigation-item-link button-arrow button-arrow-right" href="/make-a-bar-chart-with-d3-and-svelte-2/">
+                Next Post <i class="button-arrow-icon icon icon-arrow-right"></i>
+            </a>
+        </div>
+</div>                        <div class="comment-container">
+    <div class="comment container medium">
+        <script src="https://utteranc.es/client.js"
+        repo="technical-blog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async> </script>
+    </div>
+</div>    </main>
+</div>
+        </div>
+        <footer class="site-footer container large">
+    <div class="copyright">
+        Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+    </div>
+
+        <nav class="footer-nav">
+            <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-profile"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Profile</a></li>
+        <li class="menu-item menu-item-contact"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/contact/">Contact</a></li>
+</ul>
+        </nav>
+
+    <div class="footer-social">
+            <a class="footer-social-item footer-social-item-facebook" href="https://www.facebook.com/ghost"
+                target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="icon icon-facebook"></i>
+            </a>
+            <a class="footer-social-item footer-social-item-twitter" href="https://twitter.com/ghost"
+                target="_blank" rel="noopener" aria-label="Twitter">
+                <i class="icon icon-twitter"></i>
+            </a>
+        <a class="footer-social-item footer-social-item-rss"
+            href="https://feedly.com/i/subscription/feed/https://anup-blog.netlify.app/rss/" target="_blank" rel="noopener"
+            aria-label="RSS">
+            <i class="icon icon-rss"></i>
+        </a>
+    </div>
+</footer>    </div>
+
+    <div class="dimmer"></div>
+
+    <div class="off-canvas">
+        <div class="canvas-close">
+            <i class="canvas-icon icon icon-window-close"></i>
+        </div>
+        <div class="mobile-menu"></div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+    </script>
+    <script src="/assets/built/main.min.js?v=4c81978e40"></script>
+
+    
+
+    
+</body>
+
+</html>
