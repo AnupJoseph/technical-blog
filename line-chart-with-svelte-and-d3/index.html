@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="monetization" content="$ilp.uphold.com/4Uy3JQdbyfhr">
-    <title>Series Intro: Data Visualization With Svelte and D3</title>
+    <title>Line Chart with Svelte and D3</title>
     <link rel="stylesheet" href="/assets/built/screen.css?v=9475021e36">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,800">
 
@@ -15,34 +15,34 @@
         }
     </script>
 
-    <link rel="canonical" href="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
+    <link rel="canonical" href="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <link rel="amphtml" href="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/amp/" />
+    <link rel="amphtml" href="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/amp/" />
     
     <meta property="og:site_name" content="Explorations" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Series Intro: Data Visualization With Svelte and D3" />
-    <meta property="og:description" content="Curran Kelleher&#x27;s Data Visualization With React and D3 is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about D3 and data visualization in general. While I have worked with Python libraries like Matplotlib , Seaborn and Plotly and they are fantastic for" />
-    <meta property="og:url" content="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
-    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png" />
-    <meta property="article:published_time" content="2021-10-23T04:37:01.000Z" />
-    <meta property="article:modified_time" content="2021-10-23T04:37:01.000Z" />
-    <meta property="article:tag" content="Svelte" />
+    <meta property="og:title" content="Line Chart with Svelte and D3" />
+    <meta property="og:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart type in the course is a line-chart based on San Francisco temperature data, available here. We will use" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" />
+    <meta property="article:published_time" content="2021-12-10T04:39:30.000Z" />
+    <meta property="article:modified_time" content="2021-12-10T04:39:30.000Z" />
     <meta property="article:tag" content="Javascript" />
+    <meta property="article:tag" content="Svelte" />
     
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Series Intro: Data Visualization With Svelte and D3" />
-    <meta name="twitter:description" content="Curran Kelleher&#x27;s Data Visualization With React and D3 is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about D3 and data visualization in general. While I have worked with Python libraries like Matplotlib , Seaborn and Plotly and they are fantastic for" />
-    <meta name="twitter:url" content="https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" />
-    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png" />
+    <meta name="twitter:title" content="Line Chart with Svelte and D3" />
+    <meta name="twitter:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart type in the course is a line-chart based on San Francisco temperature data, available here. We will use" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Anup Joseph" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Svelte, Javascript" />
+    <meta name="twitter:data2" content="Javascript, Svelte" />
     <meta name="twitter:site" content="@ghost" />
-    <meta property="og:image:width" content="1920" />
-    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:width" content="921" />
+    <meta property="og:image:height" content="621" />
     
     <script type="application/ld+json">
 {
@@ -71,18 +71,18 @@
         "url": "https://anup-blog.netlify.app/author/anup/",
         "sameAs": []
     },
-    "headline": "Series Intro: Data Visualization With Svelte and D3",
-    "url": "https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/",
-    "datePublished": "2021-10-23T04:37:01.000Z",
-    "dateModified": "2021-10-23T04:37:01.000Z",
+    "headline": "Line Chart with Svelte and D3",
+    "url": "https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/",
+    "datePublished": "2021-12-10T04:39:30.000Z",
+    "dateModified": "2021-12-10T04:39:30.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "https://anup-blog.netlify.app/content/images/2021/10/Series-logo.png",
-        "width": 1920,
-        "height": 1080
+        "url": "https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png",
+        "width": 921,
+        "height": 621
     },
-    "keywords": "Svelte, Javascript",
-    "description": "Curran Kelleher&#x27;s Data Visualization With React and D3\n[https://www.youtube.com/watch?v&#x3D;2LhoCfjm8R4]is probably the most comprehensive\ncourse on D3 on the Internet. For some time I have been curious about D3\n[https://d3js.org/] and data visualization in general. While I have worked with\nPython libraries like Matplotlib [https://matplotlib.org/] , Seaborn\n[https://seaborn.pydata.org/] and Plotly [https://plotly.com/] and they are\nfantastic for most kinds of exploratory and scientifc plots they ha",
+    "keywords": "Javascript, Svelte",
+    "description": "&gt; This blog is second in a series of (unofficial) course notes for the Data\nVisualization with React and D3 series by Curran Kelleher. Read the introductory\nblog post here\n[https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07]\n.\nThe next chart type in the course is a line-chart based on San Francisco\ntemperature data, available here\n[https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv]\n. We",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://anup-blog.netlify.app/"
@@ -160,7 +160,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" />
 </head>
 
-<body class="post-template tag-svelte tag-javascript">
+<body class="post-template tag-javascript tag-svelte">
     <div class="site">
         <header class="site-header container">
     <div class="navbar">
@@ -194,57 +194,126 @@
             
 <div class="content-area">
     <main class="site-main">
-            <article class="post tag-svelte tag-javascript single-post">
+            <article class="post tag-javascript tag-svelte single-post">
                 <header class="post-header big-title container medium">
-        <h1 class="post-title">Series Intro: Data Visualization With Svelte and D3</h1>
+        <h1 class="post-title">Line Chart with Svelte and D3</h1>
             <div class="post-meta">
                 <span class="post-meta-item post-meta-date">
-                    <time datetime="2021-10-23">
-                            Oct 23, 2021
+                    <time datetime="2021-12-10">
+                            Dec 10, 2021
                     </time>
                 </span>
                 <span class="post-meta-item post-meta-length">
-                    2 min read
+                    4 min read
                 </span>
                     <span class="post-meta-item post-meta-tags">
-                        <a class="post-tag post-tag-svelte" href="/tag/svelte/"
-                                title="Svelte">Svelte</a><a class="post-tag post-tag-javascript" href="/tag/javascript/"
-                                title="Javascript">Javascript</a>
+                        <a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a><a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a>
                     </span>
             </div>
 </header>                    <figure class="post-media container large">
         <div class="u-placeholder horizontal">
-            <a class="post-image-link" href="/series-intro-data-visualization-with-svelte-and-d3/">
+            <a class="post-image-link" href="/line-chart-with-svelte-and-d3/">
                 <img class="post-image lazyload u-object-fit"
 
-                    data-srcset="/content/images/size/w400/2021/10/Series-logo.png 400w, /content/images/size/w750/2021/10/Series-logo.png 750w, /content/images/size/w960/2021/10/Series-logo.png 960w, /content/images/size/w1140/2021/10/Series-logo.png 1140w, /content/images/size/w1920/2021/10/Series-logo.png 1920w"
-                    data-sizes="auto" src="/content/images/size/w960/2021/10/Series-logo.png"
+                    data-srcset="/content/images/size/w400/2021/12/good-line-chart.png 400w, /content/images/size/w750/2021/12/good-line-chart.png 750w, /content/images/size/w960/2021/12/good-line-chart.png 960w, /content/images/size/w1140/2021/12/good-line-chart.png 1140w, /content/images/size/w1920/2021/12/good-line-chart.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/12/good-line-chart.png"
                     srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     alt="Series Intro: Data Visualization With Svelte and D3">
+                     alt="Line Chart with Svelte and D3">
             </a>
         </div>
 
-                <figcaption>A random series logo I just made up</figcaption>
     </figure>
                 <div class="post-content kg-canvas u-text-format">
-                    <p>Curran Kelleher's <a href="https://www.youtube.com/watch?v=2LhoCfjm8R4">Data Visualization With React and D3 </a>is probably the most comprehensive course on D3 on the Internet. For some time I have been curious about <a href="https://d3js.org/">D3</a> and data visualization in general. While I have worked with Python libraries like <a href="https://matplotlib.org/">Matplotlib</a> , <a href="https://seaborn.pydata.org/">Seaborn</a> and <a href="https://plotly.com/">Plotly</a> and they are fantastic for most kinds of exploratory and scientifc plots they have limitations on the web particularly in terms of interactivity. D3, for the uinitiated is the library which powers the bulk of all the interactive and SVG based plots on the web. It also acts as underlying low-level library for a lot of higher level libraries including Vega(For a more comprehensive list look <a href="https://github.com/wbkd/awesome-d3#charts">here</a> ).</p><p>In the series Curran uses D3 with React. However I personally find React impenetrable magic.</p><figure class="kg-card kg-image-card"><img src="https://anup-blog.netlify.app/content/images/2021/10/image-3.png" class="kg-image" alt loading="lazy" width="642" height="347" srcset="https://anup-blog.netlify.app/content/images/size/w600/2021/10/image-3.png 600w, https://anup-blog.netlify.app/content/images/2021/10/image-3.png 642w"></figure><p>Its also not very convenient to use with D3 as both access the DOM and accessing DOM directly in React is always a risky business. I found <a href="https://svelte.dev/">Svelte's </a>style of thinking really refreshing and intuitive. Svelte is a radical new approach to building user interfaces. Its essentially a compiler which takes <code>.svelte</code> files , which are components including HTML, CSS and JS required for the component to run and turns them into fast, lighweight code which can be executed in the browser.</p><p>So I am using Svelte instead of React for building the components. Also this series is not a tutorial on either D3 or Svelte. At best this can be thought of as course notes for my self to follow along with Curran's course. The only reason this is a series is because Hashnode allows to organize as series. As the series progress and more articles get added I'll add them to the end of this post.</p><p>P.S. I am not very good at either D3 and Svelte (Coming to think of it not very good at JS either 😢). The code will probably be full of errors, atrocious bad practices and horrible inefficiencies. Be kind enough to point out in the comments if you notice any such in a constructive manner.</p><p>That's all now. Hope you have a good day!</p><p></p>
+                    <blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart type in the course is a line-chart based on San Francisco temperature data, available <a href="https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv">here</a>. We will use the <a href="https://dev.to/anupjoseph/make-a-scatter-plot-with-svelte-and-d3-56md">scatter plot</a> code from the last chart <a href="https://gist.github.com/AnupJoseph/27a5f91d4a1ae6fae0b51cbe4394debd">here</a>. Some interesting things about the dataset , its temporal in nature so the chart type must be able to show that change properly.</p><p>The <code>row</code> function in the last post is note very useful here.  Lets convert the <code>temperature</code> column in to numbers. Also one of the columns is a timestamp so let's use the JS <code>Date</code> constructor to handle that.</p><pre><code class="language-js">const  row  =  function  (data)  {
+	data.temperature  =  +data.temperature;
+	data.timestamp  =  new  Date(data.timestamp);
+	return data;
+};
+
+onMount(async  ()  =&gt; {
+	dataset  =  await  csv(
+"https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv",
+	row).then((data)  =&gt; {
+		return  data;
+	});
+});
+</code></pre><p>I want to plot temperature on the Y-axis and timestamp on X-axis.Since X-axis is a timestamp we are going to use <code>scaleTime</code> from D3. I am going to modify the scales accordingly</p><pre><code class="language-js">$: xScale  =  scaleTime()
+	.domain(extent(dataset, (d)  =&gt;  d.timestamp))
+	.range([0, innerWidth]);
+
+$: yScale  =  scaleLinear()
+	.domain(extent(dataset, (d)  =&gt;  d.temperature))
+	.range([innerHeight, 0]);
+</code></pre><p>Let's just pass the temperature and timestamp points to these scales in the scatter plot logic we had before. The <code>Axis</code> doesn't need to be changed. Let's change the <code>circle</code> logic as follows:</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r="5"
+	style="fill:firebrick"
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qnnwadeu79yhvtahopul.png" class="kg-image" alt="Scatter plot of the timestamps" loading="lazy"></figure><p>Now we just need to connect these points. And it just so happens that D3 has a function to do exactly that. The <code>line</code> function in D3 gives a path provided a set of points. We can also specify the <code>curveNatural</code> to the line function.</p><pre><code class="language-js">$: line_gen  =  line()
+	.curve(curveNatural)
+	.x((d)  =&gt;  xScale(d.timestamp))
+	.y((d)  =&gt;  yScale(d.temperature))(dataset);
+</code></pre><p>Let's add this line as a path element to the svg <code>&lt;g&gt;</code> element. And style it as well so that it shows up as a line and not a closed path.</p><pre><code class="language-html">&lt;path  d={line_gen} /&gt;
+&lt;style&gt;
+	path {
+		fill: transparent;
+		stroke: rgb(18, 153, 90);
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n3h9dqay0hzq4oz81ju.png" class="kg-image" alt="Line chart" loading="lazy"></figure><p><br>Yeah, I am not a fan of those red dots either. The line probably needs to be a bit thicker as well. Similarly we need to change the format of the ticks in the bottom axis. There are a few other stylistic changes as well and I am going to do them in a single sweep. This is the final chart produced:<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u0cnb9t9s8bhcpntvuc7.png" class="kg-image" alt="Image description" loading="lazy"></figure><p>And here's the code for the same:</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/cf95b2e316352b0542d15860343a802b.js"></script><!--kg-card-end: html--><p>If you want a simple line chart or use a line chart as base for something else, then this is what you probably want. I actually want to go a bit deeper and achieve a sort of hand drawing like effect.</p><p>The property we need is <code>stroke-dasharray</code> and <code>stroke-dashoffset</code>. Think of it like so, instead of drawing a continous path, we are drawing a dashed path. However the dashes themselves are pretty big, as big as the path required for this data or more infact. Okay, rather than reading through that terrible explanation you can read through <a href="https://www.cassie.codes/">Cassie Evans</a> fantasic, interactive explanation <a href="https://www.cassie.codes/posts/creating-my-logo-animation/">here</a>.</p><p>I am setting the <code>stroke-dasharray</code> to a nice large number.<code>stroke-dashoffset</code> is set to 0.</p><pre><code class="language-css">path {
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+}
+</code></pre><p>Visually there's absolutely no difference. However the underlying changes allow us to create the animation. Let's do just that:</p><pre><code class="language-css">path {
+
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+	animation: draw 8.5s  ease;
+
+}
+@keyframes  draw {
+	from {
+		stroke-dashoffset: 4400;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+</code></pre><p>Initially the <code>stroke-dashoffset</code> is set at 4400. Hence the dash is outside the SVG  as each dash is of 4400 as well. As the transition continues the dash slowly becomes visible in the SVG viewBox.<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2wett8krjfsttselkwtx.gif" class="kg-image" alt="Line Chart" loading="lazy"></figure><p>Now I actually wanted ever so slightly more than this. I wanted to have the circles we had earlier to appear on the path as the line moves ahead. I was unable to recreate the effect perfectly, but the effect is still pleasing so here goes. I am using the <code>fly</code> transition from Svelte. Let's modify <code>circle</code> accordingly.</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r="3"
+	in:fly={{ duration: 5000, delay: i  *  15 }}
+/&gt;
+</code></pre><p>And this is the chart produced by adding that code</p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xx6uzzsecit1wyofizeq.gif" class="kg-image" alt="Line chart with circles appearing GIF" loading="lazy"></figure><p>Beautiful!! I really like the teasing effect of the dots, appearing seeming at once all together yet seperate.</p><p>Here's the final code for the chart -</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/c01fc809beadf44eec8f01b2e79dc9c3.js"></script><!--kg-card-end: html--><p>That's all for today! Have a nice day!</p>
                 </div>
                 <div class="container medium">
                     <div class="share u-hover-wrapper">
     <a class="share-item share-facebook u-hover-item"
-        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/" target="_blank" rel="noopener"><i
+        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" target="_blank" rel="noopener"><i
             class="icon icon-facebook"></i></a>
     <a class="share-item share-twitter u-hover-item"
-        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&text=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/&text=Line%20Chart%20with%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
             class="icon icon-twitter"></i></a>
     <a class="share-item share-linkedin u-hover-item"
-        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&title=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/&title=Line%20Chart%20with%20Svelte%20and%20D3"
         target="_blank" rel="noopener"><i class="icon icon-linkedin"></i></a>
     <a class="share-item share-reddit u-hover-item"
-        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&title=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/&title=Line%20Chart%20with%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
             class="icon icon-reddit"></i></a>
     <a class="share-item share-telegram u-hover-item"
-        href="https://t.me/share/url?url=https://anup-blog.netlify.app/series-intro-data-visualization-with-svelte-and-d3/&text=Series%20Intro%3A%20Data%20Visualization%20With%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
+        href="https://t.me/share/url?url=https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/&text=Line%20Chart%20with%20Svelte%20and%20D3" target="_blank" rel="noopener"><i
             class="icon icon-telegram"></i></a>
 </div>                        <section class="author">
         <div class="author-image-placeholder u-placeholder">
@@ -271,13 +340,13 @@
             </article>
             <div class="navigation container medium">
         <div class="navigation-item navigation-previous">
-            <a class="navigation-item-link button-arrow button-arrow-left" href="/recreating-a-bar-chart-design-in-python/">
+            <a class="navigation-item-link button-arrow button-arrow-left" href="/finding-your-path-in-python/">
                 <i class="button-arrow-icon icon icon-arrow-left"></i> Previous Post
             </a>
         </div>
 
         <div class="navigation-item navigation-next">
-            <a class="navigation-item-link button-arrow button-arrow-right" href="/make-a-bar-chart-with-d3-and-svelte-2/">
+            <a class="navigation-item-link button-arrow button-arrow-right" href="/maps-with-d3-and-svelte/">
                 Next Post <i class="button-arrow-icon icon icon-arrow-right"></i>
             </a>
         </div>
@@ -321,37 +390,37 @@
 </header>                        </article>
                     </div>
                     <div class="col-md-4 related-column">
-                        <article class="post tag-javascript tag-svelte">
+                        <article class="post tag-svelte tag-javascript">
                                 <figure class="post-media">
         <div class="u-placeholder rectangle">
-            <a class="post-image-link" href="/line-chart-with-svelte-and-d3/">
+            <a class="post-image-link" href="/series-intro-data-visualization-with-svelte-and-d3/">
                 <img class="post-image lazyload u-object-fit"
 
-                    data-srcset="/content/images/size/w400/2021/12/good-line-chart.png 400w, /content/images/size/w750/2021/12/good-line-chart.png 750w, /content/images/size/w960/2021/12/good-line-chart.png 960w, /content/images/size/w1140/2021/12/good-line-chart.png 1140w, /content/images/size/w1920/2021/12/good-line-chart.png 1920w"
-                    data-sizes="auto" src="/content/images/size/w960/2021/12/good-line-chart.png"
+                    data-srcset="/content/images/size/w400/2021/10/Series-logo.png 400w, /content/images/size/w750/2021/10/Series-logo.png 750w, /content/images/size/w960/2021/10/Series-logo.png 960w, /content/images/size/w1140/2021/10/Series-logo.png 1140w, /content/images/size/w1920/2021/10/Series-logo.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/10/Series-logo.png"
                     srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     alt="Line Chart with Svelte and D3">
+                     alt="Series Intro: Data Visualization With Svelte and D3">
             </a>
         </div>
 
     </figure>
                             <header class="post-header">
         <h2 class="post-title">
-            <a class="post-title-link" href="/line-chart-with-svelte-and-d3/">Line Chart with Svelte and D3</a>
+            <a class="post-title-link" href="/series-intro-data-visualization-with-svelte-and-d3/">Series Intro: Data Visualization With Svelte and D3</a>
         </h2>
             <div class="post-meta">
                 <span class="post-meta-item post-meta-date">
-                    <time datetime="2021-12-10">
-                            Dec 10, 2021
+                    <time datetime="2021-10-23">
+                            Oct 23, 2021
                     </time>
                 </span>
                 <span class="post-meta-item post-meta-length">
-                    4 min read
+                    2 min read
                 </span>
                     <span class="post-meta-item post-meta-tags">
-                        <a class="post-tag post-tag-javascript" href="/tag/javascript/"
-                                title="Javascript">Javascript</a><a class="post-tag post-tag-svelte" href="/tag/svelte/"
-                                title="Svelte">Svelte</a>
+                        <a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a><a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a>
                     </span>
             </div>
 </header>                        </article>

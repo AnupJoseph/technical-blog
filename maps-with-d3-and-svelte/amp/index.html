@@ -4,34 +4,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>Opening Resnets</title>
+    <title>Maps with D3 and Svelte</title>
 
-    <link rel="canonical" href="https://anup-blog.netlify.app/unlocking-resnets/" />
+    <link rel="canonical" href="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     
     <meta property="og:site_name" content="Explorations" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Opening Resnets" />
-    <meta property="og:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
-    <meta property="og:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
-    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
-    <meta property="article:published_time" content="2021-09-30T05:26:00.000Z" />
-    <meta property="article:modified_time" content="2021-12-10T04:47:43.000Z" />
-    <meta property="article:tag" content="Deep Learning" />
+    <meta property="og:title" content="Maps with D3 and Svelte" />
+    <meta property="og:description" content="This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" />
+    <meta property="article:published_time" content="2021-12-10T04:43:38.000Z" />
+    <meta property="article:modified_time" content="2021-12-10T04:44:48.000Z" />
+    <meta property="article:tag" content="Javascript" />
+    <meta property="article:tag" content="Svelte" />
     
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Opening Resnets" />
-    <meta name="twitter:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
-    <meta name="twitter:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
-    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
+    <meta name="twitter:title" content="Maps with D3 and Svelte" />
+    <meta name="twitter:description" content="This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Anup Joseph" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Deep Learning" />
+    <meta name="twitter:data2" content="Javascript, Svelte" />
     <meta name="twitter:site" content="@ghost" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="413" />
+    <meta property="og:image:width" content="934" />
+    <meta property="og:image:height" content="532" />
     
     <script type="application/ld+json">
 {
@@ -60,18 +61,18 @@
         "url": "https://anup-blog.netlify.app/author/anup/",
         "sameAs": []
     },
-    "headline": "Opening Resnets",
-    "url": "https://anup-blog.netlify.app/unlocking-resnets/",
-    "datePublished": "2021-09-30T05:26:00.000Z",
-    "dateModified": "2021-12-10T04:47:43.000Z",
+    "headline": "Maps with D3 and Svelte",
+    "url": "https://anup-blog.netlify.app/maps-with-d3-and-svelte/",
+    "datePublished": "2021-12-10T04:43:38.000Z",
+    "dateModified": "2021-12-10T04:44:48.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "https://anup-blog.netlify.app/content/images/2021/09/resnet.png",
-        "width": 1024,
-        "height": 413
+        "url": "https://anup-blog.netlify.app/content/images/2021/12/map_basic.png",
+        "width": 934,
+        "height": 532
     },
-    "keywords": "Deep Learning",
-    "description": "Step by step exploration on what happens to an image in Resnets\n\nResidual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu\nZhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - \nDeep Residual Learning for Image Recognition\n[https://arxiv.org/pdf/1512.03385.pdf]. Resnets effectively solves the vanishing\ngradient problem for deep networks and the ideas they introduced have been used\nin multiple architectures from there on. \n\nIn a recent assignment I w",
+    "keywords": "Javascript, Svelte",
+    "description": "&gt; This blog is fourth in a series of (unofficial) course notes for the Data\nVisualization with React and D3 series by Curran Kelleher. Read the introductory\nblog post here\n[https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07]\n.\nThe next chart in the series is a simple map of the world. In this chart Curran\nactually uses a Topojson file, then converts it into Geojson and then plots it.\nI am not planning to do that as it seems complicated and also for some reason\nthe to",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://anup-blog.netlify.app/"
@@ -646,7 +647,7 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-    
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
 
 </head>
 
@@ -661,30 +662,64 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Opening Resnets</h1>
+                <h1 class="post-title">Maps with D3 and Svelte</h1>
                 <section class="post-meta">
                     Anup Joseph -
-                    <time class="post-date" datetime="2021-09-30">30 Sep 2021</time>
+                    <time class="post-date" datetime="2021-12-10">10 Dec 2021</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" width="600" height="340" layout="responsive"></amp-img>
+                <amp-img src="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" width="600" height="340" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p><strong><em>Step by step exploration on what happens to an image in Resnets</em></strong></p><p>Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - <a href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a>. Resnets effectively solves the vanishing gradient problem for deep networks and the ideas they introduced have been used in multiple architectures from there on. </p><p>In a recent assignment I was tasked with understanding how Resnets worked and present the same. I was curious to know what actually happened to an image in Resnet and tried to work out the same. This blog post is the result of that experiment and tries to illustrate the various calculations that happen inside the Resnet architecture.</p><p><em>Before we begin, I am almost certain that this article will have mistakes. I have tried my best to eliminate them. However if you do find any mistake please let me know in the comment or mail personally <a href="mailto:anup20joseph@gmail.com">here</a> and I will fix them as soon as possible.</em></p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Resnet architectures</figcaption></figure><p>The Resnet paper,  quite helpfully provides this diagram dividing the network into blocks and showing the output sizes of each block. However this picture might give idea that stride is common through the network from block 2 to 5, which is not the case. We also need to look at the Resnet 34 network given in the paper.</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Resnet 34 architecture with residual connections</figcaption></figure><p>This image adds crucial information about strides missing in the earlier image. However this does not have the concise block structures of the earlier image, so I suggest to keep them both at hand. There is one more important bit of information useful in computing the image size. The paper expresses this as </p><p><em>we use identity mapping for all shortcuts and zero-padding for increasing dimensions.</em></p><p>However, I feel that this bit of Python in the (old)Tensorflow implementation of Resnet is a bit more helpful.</p><pre><code class="language-python">padding=('SAME' if strides == 1 else 'VALID')</code></pre><p>This acts as a nice rule for computing through the architecture after block 1 without having to think it through every time. For people wondering what is <em>padding="SAME" </em>and <em>padding="VALID" </em>try this <a href="https://stackoverflow.com/questions/37674306/what-is-the-difference-between-same-and-valid-padding-in-tf-nn-max-pool-of-t">link</a>. Armed with all that info, lets get to work.</p><p>Input image size - (224,224,3)</p><h3 id="block-1-conv1">Block 1: conv1</h3><p>Layer 1: Convolution(filters=64, kernel_size=7x7, strides=2)</p><p>To calculate the output size in a convolution layer we use this formula:</p><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 542 80" width="542" height="80">
-  
-  
-  <defs>
-    
-  </defs>
-  <rect x="0" y="0" width="542" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 155 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">input - kernel_size + 2*padding</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 158.86764805005396 0.6714253277797297)"><path d="M-0.1 0.54 C53.29 0.71, 266.12 0.33, 319.35 0.37 M-1.61 -0.23 C51.73 0.16, 265.21 1.21, 318.58 1.57" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(504 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">+ 1</text></g><g transform="translate(318 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">stride</text></g></svg><p>For the first input the above rule does not apply instead the padding is 2.</p><p>Output size = (224 - 7 + 2 * 2) / 2 + 1 = 111.5 ≈ 112.															</p><p>Final output size of this block = (112x112x64)</p><h3 id="block-2-conv2x">Block 2: conv2_x</h3><p>Layer 1: Maxpool(kernel_size=3x3, strides=2)</p><p>To calculate the output size in a maxpool layer we use this formula</p><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 407 80" width="407" height="80">
-  
-  
-  <defs>
-    
-  </defs>
-  <rect x="0" y="0" width="407" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 91.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">input - kernel_size</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 96.54208162748716 0.4570427794335501)"><path d="M-0.1 0.54 C32.51 0.64, 162.25 -0.03, 194.7 -0.06 M-1.61 -0.23 C30.96 0.08, 161.33 0.85, 193.93 1.14" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(369 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">+ 1</text></g><g transform="translate(218 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">stride</text></g></svg><p>Output size = (112 - 3) / 2+ 1 = 56																				</p><p>Output size = (56x56x64)</p><p>Layer 2: Convolution(filters=64, kernel_size=3x3, strides=1)</p><p>Output size = (56 - 3 + 2 x 1 ) / 1 + 1 = 55.5 ≈ 56</p><p>Output size = (56x6x64)</p><p>There are 5 more Convolution(filters=64, kernel_size=3x3, strides=1) layers. As you can see from the above calculation this does not downsample the image and hence the output size remains the size. Hence the output from this block is (56x56x64).</p><h3 id="block-3-conv3x">Block 3: conv3_x</h3><p>Layer 1: Convolution(filters=128, kernel_size=3x3, strides=2)</p><p>Output size = (56 - 3 + 2 x 0) / 2 + 1 = 27.5 ≈ 28</p><p>Output size = (28x28x128)</p><p>Layer 2: Convolution(filters=128, kernel_size=3x3, strides=1)</p><p>Output size = (28 - 3 + 2 x 1) / 1 + 1 = 28</p><p>Output size = (28x28x128)</p><p>There are 6 more Convolution(filters=128, kernel_size=3x3, strides=1) layers. Again this does not downsample the image and hence the output size remains the size. Hence the output from this block is (28x28x128).</p><h3 id="block-4-conv4x">Block 4: conv4_x</h3><p>Layer 1: Convolution(filters=256, kernel_size=3x3, strides=2)</p><p>Output size = (28 - 3 + 2 x 0) / 2 + 1 = 13.5 ≈ 14</p><p>Output size = (14x14x256)</p><p>Layer 2: Convolution(filters=256, kernel_size=3x3, strides=1)</p><p>Output size = (14 - 3 + 2 x 1) / 1 + 1 = 14</p><p>Output size = (14x14x256)</p><p>There are 10 more Convolution(filters=256, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (14x14x256).</p><h3 id="block-5-conv5x">Block 5: conv5_x</h3><p>Layer 1: Convolution(filters=512, kernel_size=3x3, strides=2)</p><p>Output size = (14 - 3 + 2 x 0) / 2 + 1 = 6.5 ≈ 7</p><p>Output size = (7x7x512)</p><p>Layer 2: Convolution(filters=512, kernel_size=3x3, strides=1)</p><p>Output size = (7 - 3 + 2x1)/1 +1 = 7</p><p>Output size = (7x7x512)</p><p>There are 4 more Convolution(filters=512, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (7x7x512).</p><h3 id="block-5-conv5x-1">Block 5: conv5_x</h3><p>Global average pool is essentially a large classifier which converts the 7x7x512 layer into 1x1x1000 as the Resnet is trained on the ImageNet dataset which has a thousand classes.</p>
+                <blockquote>This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson file, then converts it into Geojson and then plots it. I am not planning to do that as it seems complicated and also for some reason the <a href="https://github.com/topojson/topojson">topojson</a> library does not play nice with Node on my computer and I was too lazy to actually debug it 😬. So instead I are going to use a simple geojson I found on <a href="https://www.d3-graph-gallery.com/graph/backgroundmap_basic.html">D3 Graph Gallery</a>.</p><p>I am going to start from a fresh Svelte project instead of carrying on from the last. To do and install <a href="https://d3js.org/">d3</a> along with its:</p><pre><code class="language-bash">npx degit sveltejs/template world-map
+cd word-map
+npm install
+npm install d3
+</code></pre><p>And to run the app itself:</p><pre><code class="language-bash">npm run dev
+</code></pre><p>Let clean everthing in the App.svelte. The dataset for the map is available <a href="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson">here</a>. Let's use the <a href="https://github.com/d3/d3-fetch/blob/v3.0.1/README.md#json">d3 json</a> method to load in the data and use it.</p><pre><code class="language-js">import { json } from  "d3";
+
+let  dataset  =  [];
+json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+).then((data)  =&gt; {
+	dataset  =  data.features;
+});
+</code></pre><p>I am only using the features array in the geojson and this contains everything we need to draw the map. Let's start by making an SVG in the markup and adding a width and height property to it.</p><pre><code class="language-html">&lt;script&gt;
+	const  width  =  1200,
+	height  =  600;
+&lt;/script&gt;
+&lt;main&gt;
+	&lt;svg  {width}  {height}&gt;
+	&lt;/svg&gt;
+&lt;/main&gt;
+</code></pre><p>If you <code>console.log</code> the dataset at this point (and well go deeper and deeper into the json tree) you'll notice that the geojson contains the boundary information using a construct called <code>geometry</code>. The only problem with this is that, this construct is not a svg path and is instead of course a co-ordinate you can plot. To solve this problem D3 provides a powerful geographic path generator, <a href="https://github.com/d3/d3-geo#geoPath">d3.geoPath</a> which can take in a given GeoJSON feature or geometry to generate an SVG path.</p><p>D3 also provides a lot of geographical projections as well to transform how the map looks like. I am going to split out this logic to drawing the paths themeselves into a different component called <code>Marks</code>. So let import the new component into <code>App.svelte</code> like so:</p><pre><code class="language-js">import Marks from "./Marks.svelte"
+</code></pre><p>And pass the dataset to the component like so:</p><pre><code class="language-html">&lt;Marks  {dataset} /&gt;
+</code></pre><p>Now of course this component does not exist, so lets go about making it real. We'll also import the projections and path generator,</p><pre><code class="language-html">&lt;script&gt;
+	import { geoPath, geoNaturalEarth1 } from  "d3";
+	export let  dataset  =  [];
+	const  projection  =  geoNaturalEarth1();
+	const  path  =  geoPath(projection);
+&lt;/script&gt;
+</code></pre><p>Afterwards its really easy. We just need to iterate over the dataset and pass the data to the <code>path</code> function:</p><pre><code class="language-html">{#each  dataset  as data}
+	&lt;path  d={path(data)} /&gt;
+{/each}
+</code></pre><p>And now we have it, a perfectly horrible world map,<br /></p><figure class="kg-card kg-image-card"><amp-img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mi826iwp5rt0v75zkc31.png" class="kg-image" alt="World map basic" width="934" height="532" layout="responsive"></amp-img></figure><p><br />I actually kind of like the stark, edgy nature of the map. I was going to style this, but this is actually rather nice.</p><p>So of course the next part will be dedicated to showing off a cool svelte feature I just found. Let first remove all the <code>fill</code> colour from the map and add a <code>stroke</code>.</p><pre><code class="language-css">&lt;style&gt;
+	path {
+		fill: none;
+		stroke:darkgreen;
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/twelxc4qd1j83obllota.png" class="kg-image" alt="Simple styled world map" width="938" height="503" layout="responsive"></amp-img></figure><p>Svelte has great support for styling. One thing I like in particular are the <a href="https://svelte.dev/tutorial/transition">transition directives</a>. These are tools for using motion more effectively and gracefully in your app and generally making it look smoother.<br />Lets import the draw function from <code>svelte/transitons</code> and add it to the <code>path</code> tag.</p><pre><code class="language-html">&lt;script&gt;
+	import { draw } from  "svelte/transition";
+&lt;/script&gt;
+</code></pre><pre><code class="language-html">&lt;path  transition:draw={{ duration: 5000, delay: 0 }}  d={path(data)} /&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-anim src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z74vkgtgrjllioun844n.gif" class="kg-image" alt="Map draw gif " width="1294" height="640" layout="responsive"></amp-anim></figure><p>These transition directives actually pack in a lot of flexibility. We can pass in custom easing function to control the speed of the transition and we can even pass in custom CSS and JS to control the transtitions.</p><pre><code class="language-js">import { quadInOut } from  "svelte/easing";
+</code></pre><pre><code class="language-html">&lt;path
+	transition:draw={{ duration: 5000, delay: 0, easing: quadInOut }}
+	d={path(data)}
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-anim src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fi3oskspth8ittcaixmn.gif" class="kg-image" alt="Image description" width="1294" height="640" layout="responsive"></amp-anim></figure><p>Personally I think that's just awesome 🚀. Here's the final code.</p><p>Well that's it for today. Hope you have a nice day!</p>
 
             </section>
 

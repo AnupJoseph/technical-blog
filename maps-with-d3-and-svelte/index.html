@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="monetization" content="$ilp.uphold.com/4Uy3JQdbyfhr">
+    <title>Maps with D3 and Svelte</title>
+    <link rel="stylesheet" href="/assets/built/screen.css?v=9475021e36">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i,800">
+
+    <script>
+        if (localStorage.getItem('alto_dark') == 'true') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+
+    <link rel="canonical" href="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://anup-blog.netlify.app/maps-with-d3-and-svelte/amp/" />
+    
+    <meta property="og:site_name" content="Explorations" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Maps with D3 and Svelte" />
+    <meta property="og:description" content="This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" />
+    <meta property="article:published_time" content="2021-12-10T04:43:38.000Z" />
+    <meta property="article:modified_time" content="2021-12-10T04:44:48.000Z" />
+    <meta property="article:tag" content="Javascript" />
+    <meta property="article:tag" content="Svelte" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Maps with D3 and Svelte" />
+    <meta name="twitter:description" content="This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/maps-with-d3-and-svelte/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Anup Joseph" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Javascript, Svelte" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="934" />
+    <meta property="og:image:height" content="532" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Explorations",
+        "url": "https://anup-blog.netlify.app/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anup Joseph",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://anup-blog.netlify.app/content/images/2021/09/anup_avatar.png",
+            "width": 528,
+            "height": 560
+        },
+        "url": "https://anup-blog.netlify.app/author/anup/",
+        "sameAs": []
+    },
+    "headline": "Maps with D3 and Svelte",
+    "url": "https://anup-blog.netlify.app/maps-with-d3-and-svelte/",
+    "datePublished": "2021-12-10T04:43:38.000Z",
+    "dateModified": "2021-12-10T04:44:48.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://anup-blog.netlify.app/content/images/2021/12/map_basic.png",
+        "width": 934,
+        "height": 532
+    },
+    "keywords": "Javascript, Svelte",
+    "description": "&gt; This blog is fourth in a series of (unofficial) course notes for the Data\nVisualization with React and D3 series by Curran Kelleher. Read the introductory\nblog post here\n[https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07]\n.\nThe next chart in the series is a simple map of the world. In this chart Curran\nactually uses a Topojson file, then converts it into Geojson and then plots it.\nI am not planning to do that as it seems complicated and also for some reason\nthe to",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anup-blog.netlify.app/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.16" />
+    <link rel="alternate" type="application/rss+xml" title="Explorations" href="https://anup-blog.netlify.app/rss/" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.10.0/umd/portal.min.js" data-ghost="https://anup-blog.netlify.app/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style><style>:root {--ghost-accent-color: #13ae63;}</style>
+    <!-- link tag -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" />
+</head>
+
+<body class="post-template tag-javascript tag-svelte">
+    <div class="site">
+        <header class="site-header container">
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="burger hidden-lg hidden-xl"></div>
+            <a class="logo" href="https://anup-blog.netlify.app">
+        <span class="logo-text">Explorations</span>
+</a>            <div class="sep hidden-xs hidden-sm hidden-sm"></div>
+                <nav class="main-menu hidden-xs hidden-sm hidden-md">
+                    <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-home"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/">Home</a></li>
+        <li class="menu-item menu-item-about"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/about/">About</a></li>
+        <li class="menu-item menu-item-collection"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/collections/">Collection</a></li>
+        <li class="menu-item menu-item-author"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Author</a></li>
+</ul>
+                </nav>
+        </div>
+        <div class="navbar-right">
+            <div class="toggle-track">
+                <div class="toggle-moon"><i class="icon icon-brightness-2"></i></div>
+                <div class="toggle-sun"><i class="icon icon-white-balance-sunny"></i></div>
+                <div class="toggle-thumb"></div>
+            </div>
+        </div>
+    </div>
+</header>        <div class="site-content">
+            
+<div class="content-area">
+    <main class="site-main">
+            <article class="post tag-javascript tag-svelte featured single-post">
+                <header class="post-header big-title container medium">
+        <h1 class="post-title">Maps with D3 and Svelte</h1>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-12-10">
+                            Dec 10, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    4 min read
+                </span>
+                    <span class="post-meta-item post-meta-tags">
+                        <a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a><a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a>
+                    </span>
+            </div>
+</header>                    <figure class="post-media container large">
+        <div class="u-placeholder horizontal">
+            <a class="post-image-link" href="/maps-with-d3-and-svelte/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/12/map_basic.png 400w, /content/images/size/w750/2021/12/map_basic.png 750w, /content/images/size/w960/2021/12/map_basic.png 960w, /content/images/size/w1140/2021/12/map_basic.png 1140w, /content/images/size/w1920/2021/12/map_basic.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/12/map_basic.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Maps with D3 and Svelte">
+            </a>
+        </div>
+
+    </figure>
+                <div class="post-content kg-canvas u-text-format">
+                    <blockquote>This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson file, then converts it into Geojson and then plots it. I am not planning to do that as it seems complicated and also for some reason the <a href="https://github.com/topojson/topojson">topojson</a> library does not play nice with Node on my computer and I was too lazy to actually debug it 😬. So instead I are going to use a simple geojson I found on <a href="https://www.d3-graph-gallery.com/graph/backgroundmap_basic.html">D3 Graph Gallery</a>.</p><p>I am going to start from a fresh Svelte project instead of carrying on from the last. To do and install <a href="https://d3js.org/">d3</a> along with its:</p><pre><code class="language-bash">npx degit sveltejs/template world-map
+cd word-map
+npm install
+npm install d3
+</code></pre><p>And to run the app itself:</p><pre><code class="language-bash">npm run dev
+</code></pre><p>Let clean everthing in the App.svelte. The dataset for the map is available <a href="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson">here</a>. Let's use the <a href="https://github.com/d3/d3-fetch/blob/v3.0.1/README.md#json">d3 json</a> method to load in the data and use it.</p><pre><code class="language-js">import { json } from  "d3";
+
+let  dataset  =  [];
+json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+).then((data)  =&gt; {
+	dataset  =  data.features;
+});
+</code></pre><p>I am only using the features array in the geojson and this contains everything we need to draw the map. Let's start by making an SVG in the markup and adding a width and height property to it.</p><pre><code class="language-html">&lt;script&gt;
+	const  width  =  1200,
+	height  =  600;
+&lt;/script&gt;
+&lt;main&gt;
+	&lt;svg  {width}  {height}&gt;
+	&lt;/svg&gt;
+&lt;/main&gt;
+</code></pre><p>If you <code>console.log</code> the dataset at this point (and well go deeper and deeper into the json tree) you'll notice that the geojson contains the boundary information using a construct called <code>geometry</code>. The only problem with this is that, this construct is not a svg path and is instead of course a co-ordinate you can plot. To solve this problem D3 provides a powerful geographic path generator, <a href="https://github.com/d3/d3-geo#geoPath">d3.geoPath</a> which can take in a given GeoJSON feature or geometry to generate an SVG path.</p><p>D3 also provides a lot of geographical projections as well to transform how the map looks like. I am going to split out this logic to drawing the paths themeselves into a different component called <code>Marks</code>. So let import the new component into <code>App.svelte</code> like so:</p><pre><code class="language-js">import Marks from "./Marks.svelte"
+</code></pre><p>And pass the dataset to the component like so:</p><pre><code class="language-html">&lt;Marks  {dataset} /&gt;
+</code></pre><p>Now of course this component does not exist, so lets go about making it real. We'll also import the projections and path generator,</p><pre><code class="language-html">&lt;script&gt;
+	import { geoPath, geoNaturalEarth1 } from  "d3";
+	export let  dataset  =  [];
+	const  projection  =  geoNaturalEarth1();
+	const  path  =  geoPath(projection);
+&lt;/script&gt;
+</code></pre><p>Afterwards its really easy. We just need to iterate over the dataset and pass the data to the <code>path</code> function:</p><pre><code class="language-html">{#each  dataset  as data}
+	&lt;path  d={path(data)} /&gt;
+{/each}
+</code></pre><p>And now we have it, a perfectly horrible world map,<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mi826iwp5rt0v75zkc31.png" class="kg-image" alt="World map basic" loading="lazy"></figure><p><br>I actually kind of like the stark, edgy nature of the map. I was going to style this, but this is actually rather nice.</p><p>So of course the next part will be dedicated to showing off a cool svelte feature I just found. Let first remove all the <code>fill</code> colour from the map and add a <code>stroke</code>.</p><pre><code class="language-css">&lt;style&gt;
+	path {
+		fill: none;
+		stroke:darkgreen;
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/twelxc4qd1j83obllota.png" class="kg-image" alt="Simple styled world map" loading="lazy"></figure><p>Svelte has great support for styling. One thing I like in particular are the <a href="https://svelte.dev/tutorial/transition">transition directives</a>. These are tools for using motion more effectively and gracefully in your app and generally making it look smoother.<br>Lets import the draw function from <code>svelte/transitons</code> and add it to the <code>path</code> tag.</p><pre><code class="language-html">&lt;script&gt;
+	import { draw } from  "svelte/transition";
+&lt;/script&gt;
+</code></pre><pre><code class="language-html">&lt;path  transition:draw={{ duration: 5000, delay: 0 }}  d={path(data)} /&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z74vkgtgrjllioun844n.gif" class="kg-image" alt="Map draw gif " loading="lazy"></figure><p>These transition directives actually pack in a lot of flexibility. We can pass in custom easing function to control the speed of the transition and we can even pass in custom CSS and JS to control the transtitions.</p><pre><code class="language-js">import { quadInOut } from  "svelte/easing";
+</code></pre><pre><code class="language-html">&lt;path
+	transition:draw={{ duration: 5000, delay: 0, easing: quadInOut }}
+	d={path(data)}
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fi3oskspth8ittcaixmn.gif" class="kg-image" alt="Image description" loading="lazy"></figure><p>Personally I think that's just awesome 🚀. Here's the final code.</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/b4fc9a3eacc006ea5e5e20bb8f2c56d4.js"></script><!--kg-card-end: html--><p>Well that's it for today. Hope you have a nice day!</p>
+                </div>
+                <div class="container medium">
+                    <div class="share u-hover-wrapper">
+    <a class="share-item share-facebook u-hover-item"
+        href="https://www.facebook.com/sharer.php?u=https://anup-blog.netlify.app/maps-with-d3-and-svelte/" target="_blank" rel="noopener"><i
+            class="icon icon-facebook"></i></a>
+    <a class="share-item share-twitter u-hover-item"
+        href="https://twitter.com/intent/tweet?url=https://anup-blog.netlify.app/maps-with-d3-and-svelte/&text=Maps%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-twitter"></i></a>
+    <a class="share-item share-linkedin u-hover-item"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=https://anup-blog.netlify.app/maps-with-d3-and-svelte/&title=Maps%20with%20D3%20and%20Svelte"
+        target="_blank" rel="noopener"><i class="icon icon-linkedin"></i></a>
+    <a class="share-item share-reddit u-hover-item"
+        href="https://reddit.com/submit?url=https://anup-blog.netlify.app/maps-with-d3-and-svelte/&title=Maps%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-reddit"></i></a>
+    <a class="share-item share-telegram u-hover-item"
+        href="https://t.me/share/url?url=https://anup-blog.netlify.app/maps-with-d3-and-svelte/&text=Maps%20with%20D3%20and%20Svelte" target="_blank" rel="noopener"><i
+            class="icon icon-telegram"></i></a>
+</div>                        <section class="author">
+        <div class="author-image-placeholder u-placeholder">
+            <img class="author-image lazyload u-object-fit"
+                data-srcset="/content/images/size/w150/2021/09/anup_avatar.png"
+                src="/content/images/size/w150/2021/09/anup_avatar.png"
+                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                alt="Anup Joseph">
+        </div>
+        <div class="author-wrapper">
+            <header class="author-header">
+                <div class="author-header-wrapper">
+                    <h4 class="author-name">Anup Joseph</h4>
+                    <div class="author-social">
+                        <a class="author-social-item author-more"
+                            href=/author/anup/>More posts</a>
+                    </div>
+                </div>
+            </header>
+            <div class="author-bio"></div>
+        </div>
+    </section>
+                </div>
+            </article>
+            <div class="navigation container medium">
+        <div class="navigation-item navigation-previous">
+            <a class="navigation-item-link button-arrow button-arrow-left" href="/line-chart-with-svelte-and-d3/">
+                <i class="button-arrow-icon icon icon-arrow-left"></i> Previous Post
+            </a>
+        </div>
+
+</div>                    <section class="related-posts container medium">
+            <h3 class="related-title"><span class="text">You might also like...</span></h3>
+            <div class="row">
+                    <div class="col-md-4 related-column">
+                        <article class="post tag-javascript tag-svelte">
+                                <figure class="post-media">
+        <div class="u-placeholder rectangle">
+            <a class="post-image-link" href="/line-chart-with-svelte-and-d3/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/12/good-line-chart.png 400w, /content/images/size/w750/2021/12/good-line-chart.png 750w, /content/images/size/w960/2021/12/good-line-chart.png 960w, /content/images/size/w1140/2021/12/good-line-chart.png 1140w, /content/images/size/w1920/2021/12/good-line-chart.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/12/good-line-chart.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Line Chart with Svelte and D3">
+            </a>
+        </div>
+
+    </figure>
+                            <header class="post-header">
+        <h2 class="post-title">
+            <a class="post-title-link" href="/line-chart-with-svelte-and-d3/">Line Chart with Svelte and D3</a>
+        </h2>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-12-10">
+                            Dec 10, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    4 min read
+                </span>
+                    <span class="post-meta-item post-meta-tags">
+                        <a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a><a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a>
+                    </span>
+            </div>
+</header>                        </article>
+                    </div>
+                    <div class="col-md-4 related-column">
+                        <article class="post tag-svelte tag-javascript">
+                                <figure class="post-media">
+        <div class="u-placeholder rectangle">
+            <a class="post-image-link" href="/series-intro-data-visualization-with-svelte-and-d3/">
+                <img class="post-image lazyload u-object-fit"
+
+                    data-srcset="/content/images/size/w400/2021/10/Series-logo.png 400w, /content/images/size/w750/2021/10/Series-logo.png 750w, /content/images/size/w960/2021/10/Series-logo.png 960w, /content/images/size/w1140/2021/10/Series-logo.png 1140w, /content/images/size/w1920/2021/10/Series-logo.png 1920w"
+                    data-sizes="auto" src="/content/images/size/w960/2021/10/Series-logo.png"
+                    srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Series Intro: Data Visualization With Svelte and D3">
+            </a>
+        </div>
+
+    </figure>
+                            <header class="post-header">
+        <h2 class="post-title">
+            <a class="post-title-link" href="/series-intro-data-visualization-with-svelte-and-d3/">Series Intro: Data Visualization With Svelte and D3</a>
+        </h2>
+            <div class="post-meta">
+                <span class="post-meta-item post-meta-date">
+                    <time datetime="2021-10-23">
+                            Oct 23, 2021
+                    </time>
+                </span>
+                <span class="post-meta-item post-meta-length">
+                    2 min read
+                </span>
+                    <span class="post-meta-item post-meta-tags">
+                        <a class="post-tag post-tag-svelte" href="/tag/svelte/"
+                                title="Svelte">Svelte</a><a class="post-tag post-tag-javascript" href="/tag/javascript/"
+                                title="Javascript">Javascript</a>
+                    </span>
+            </div>
+</header>                        </article>
+                    </div>
+            </div>
+        </section>
+            <div class="comment-container">
+    <div class="comment container medium">
+        <script src="https://utteranc.es/client.js"
+        repo="technical-blog"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async> </script>
+    </div>
+</div>    </main>
+</div>
+        </div>
+        <footer class="site-footer container large">
+    <div class="copyright">
+        Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+    </div>
+
+        <nav class="footer-nav">
+            <ul class="nav-list u-plain-list">
+        <li class="menu-item menu-item-profile"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/profile/">Profile</a></li>
+        <li class="menu-item menu-item-contact"><a class="menu-item-link"
+                href="https://anup-blog.netlify.app/contact/">Contact</a></li>
+</ul>
+        </nav>
+
+    <div class="footer-social">
+            <a class="footer-social-item footer-social-item-facebook" href="https://www.facebook.com/ghost"
+                target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="icon icon-facebook"></i>
+            </a>
+            <a class="footer-social-item footer-social-item-twitter" href="https://twitter.com/ghost"
+                target="_blank" rel="noopener" aria-label="Twitter">
+                <i class="icon icon-twitter"></i>
+            </a>
+        <a class="footer-social-item footer-social-item-rss"
+            href="https://feedly.com/i/subscription/feed/https://anup-blog.netlify.app/rss/" target="_blank" rel="noopener"
+            aria-label="RSS">
+            <i class="icon icon-rss"></i>
+        </a>
+    </div>
+</footer>    </div>
+
+    <div class="dimmer"></div>
+
+    <div class="off-canvas">
+        <div class="canvas-close">
+            <i class="canvas-icon icon icon-window-close"></i>
+        </div>
+        <div class="mobile-menu"></div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+    </script>
+    <script data-goatcounter="https://anupjoseph.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+    <script src="/assets/built/main.min.js?v=9475021e36"></script>
+
+    
+
+    <!-- script tag -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js"></script>
+</body>
+
+</html>

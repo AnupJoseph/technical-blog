@@ -1,4 +1,170 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Explorations]]></title><description><![CDATA[Thoughts, stories, ideas and whatever other random thing came to my mind.]]></description><link>https://anup-blog.netlify.app/</link><image><url>https://anup-blog.netlify.app/favicon.png</url><title>Explorations</title><link>https://anup-blog.netlify.app/</link></image><generator>Ghost 4.16</generator><lastBuildDate>Sun, 31 Oct 2021 07:22:45 GMT</lastBuildDate><atom:link href="https://anup-blog.netlify.app/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Make a scatter plot with Svelte and D3]]></title><description><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a scatter plot based on the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Flowers Dataset</a>. I figured we could reuse</p>]]></description><link>https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/</link><guid isPermaLink="false">61739751220c1814f0c9053f</guid><dc:creator><![CDATA[Anup Joseph]]></dc:creator><pubDate>Sat, 23 Oct 2021 05:06:23 GMT</pubDate><media:content url="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" medium="image"/><content:encoded><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><img src="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" alt="Make a scatter plot with Svelte and D3"><p>The next chart in the series is a scatter plot based on the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Flowers Dataset</a>. I figured we could reuse a lot of the code from earlier examples than rewiriting everything from scratch. A properly cleaned version of the dataset by Curran is available <a href="https://gist.githubusercontent.com/curran/9e04ccfebeb84bcdc76c/raw/3d0667367fce04e8ca204117c290c42cece7fde0/iris.csv">here</a>.The dataset has four numerical columns namely <code>sepal_length,sepal_width,petal_length,petal_width</code> which we need to convert to numbers. Let&apos;s change the <code>row</code> and <code>onMount</code> functions to reflect this:<br></p><pre><code>const  row  =  function  (data)  {
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Explorations]]></title><description><![CDATA[Thoughts, stories, ideas and whatever other random thing came to my mind.]]></description><link>https://anup-blog.netlify.app/</link><image><url>https://anup-blog.netlify.app/favicon.png</url><title>Explorations</title><link>https://anup-blog.netlify.app/</link></image><generator>Ghost 4.16</generator><lastBuildDate>Fri, 10 Dec 2021 04:48:25 GMT</lastBuildDate><atom:link href="https://anup-blog.netlify.app/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Maps with D3 and Svelte]]></title><description><![CDATA[<blockquote>This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson</p>]]></description><link>https://anup-blog.netlify.app/maps-with-d3-and-svelte/</link><guid isPermaLink="false">61b2da8394d8781c718bf3fb</guid><category><![CDATA[Javascript]]></category><category><![CDATA[Svelte]]></category><dc:creator><![CDATA[Anup Joseph]]></dc:creator><pubDate>Fri, 10 Dec 2021 04:43:38 GMT</pubDate><media:content url="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" medium="image"/><content:encoded><![CDATA[<blockquote>This blog is fourth in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><img src="https://anup-blog.netlify.app/content/images/2021/12/map_basic.png" alt="Maps with D3 and Svelte"><p>The next chart in the series is a simple map of the world. In this chart Curran actually uses a Topojson file, then converts it into Geojson and then plots it. I am not planning to do that as it seems complicated and also for some reason the <a href="https://github.com/topojson/topojson">topojson</a> library does not play nice with Node on my computer and I was too lazy to actually debug it &#x1F62C;. So instead I are going to use a simple geojson I found on <a href="https://www.d3-graph-gallery.com/graph/backgroundmap_basic.html">D3 Graph Gallery</a>.</p><p>I am going to start from a fresh Svelte project instead of carrying on from the last. To do and install <a href="https://d3js.org/">d3</a> along with its:</p><pre><code class="language-bash">npx degit sveltejs/template world-map
+cd word-map
+npm install
+npm install d3
+</code></pre><p>And to run the app itself:</p><pre><code class="language-bash">npm run dev
+</code></pre><p>Let clean everthing in the App.svelte. The dataset for the map is available <a href="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson">here</a>. Let&apos;s use the <a href="https://github.com/d3/d3-fetch/blob/v3.0.1/README.md#json">d3 json</a> method to load in the data and use it.</p><pre><code class="language-js">import { json } from  &quot;d3&quot;;
+
+let  dataset  =  [];
+json(&quot;https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson&quot;
+).then((data)  =&gt; {
+	dataset  =  data.features;
+});
+</code></pre><p>I am only using the features array in the geojson and this contains everything we need to draw the map. Let&apos;s start by making an SVG in the markup and adding a width and height property to it.</p><pre><code class="language-html">&lt;script&gt;
+	const  width  =  1200,
+	height  =  600;
+&lt;/script&gt;
+&lt;main&gt;
+	&lt;svg  {width}  {height}&gt;
+	&lt;/svg&gt;
+&lt;/main&gt;
+</code></pre><p>If you <code>console.log</code> the dataset at this point (and well go deeper and deeper into the json tree) you&apos;ll notice that the geojson contains the boundary information using a construct called <code>geometry</code>. The only problem with this is that, this construct is not a svg path and is instead of course a co-ordinate you can plot. To solve this problem D3 provides a powerful geographic path generator, <a href="https://github.com/d3/d3-geo#geoPath">d3.geoPath</a> which can take in a given GeoJSON feature or geometry to generate an SVG path.</p><p>D3 also provides a lot of geographical projections as well to transform how the map looks like. I am going to split out this logic to drawing the paths themeselves into a different component called <code>Marks</code>. So let import the new component into <code>App.svelte</code> like so:</p><pre><code class="language-js">import Marks from &quot;./Marks.svelte&quot;
+</code></pre><p>And pass the dataset to the component like so:</p><pre><code class="language-html">&lt;Marks  {dataset} /&gt;
+</code></pre><p>Now of course this component does not exist, so lets go about making it real. We&apos;ll also import the projections and path generator,</p><pre><code class="language-html">&lt;script&gt;
+	import { geoPath, geoNaturalEarth1 } from  &quot;d3&quot;;
+	export let  dataset  =  [];
+	const  projection  =  geoNaturalEarth1();
+	const  path  =  geoPath(projection);
+&lt;/script&gt;
+</code></pre><p>Afterwards its really easy. We just need to iterate over the dataset and pass the data to the <code>path</code> function:</p><pre><code class="language-html">{#each  dataset  as data}
+	&lt;path  d={path(data)} /&gt;
+{/each}
+</code></pre><p>And now we have it, a perfectly horrible world map,<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mi826iwp5rt0v75zkc31.png" class="kg-image" alt="Maps with D3 and Svelte" loading="lazy"></figure><p><br>I actually kind of like the stark, edgy nature of the map. I was going to style this, but this is actually rather nice.</p><p>So of course the next part will be dedicated to showing off a cool svelte feature I just found. Let first remove all the <code>fill</code> colour from the map and add a <code>stroke</code>.</p><pre><code class="language-css">&lt;style&gt;
+	path {
+		fill: none;
+		stroke:darkgreen;
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/twelxc4qd1j83obllota.png" class="kg-image" alt="Maps with D3 and Svelte" loading="lazy"></figure><p>Svelte has great support for styling. One thing I like in particular are the <a href="https://svelte.dev/tutorial/transition">transition directives</a>. These are tools for using motion more effectively and gracefully in your app and generally making it look smoother.<br>Lets import the draw function from <code>svelte/transitons</code> and add it to the <code>path</code> tag.</p><pre><code class="language-html">&lt;script&gt;
+	import { draw } from  &quot;svelte/transition&quot;;
+&lt;/script&gt;
+</code></pre><pre><code class="language-html">&lt;path  transition:draw={{ duration: 5000, delay: 0 }}  d={path(data)} /&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/z74vkgtgrjllioun844n.gif" class="kg-image" alt="Maps with D3 and Svelte" loading="lazy"></figure><p>These transition directives actually pack in a lot of flexibility. We can pass in custom easing function to control the speed of the transition and we can even pass in custom CSS and JS to control the transtitions.</p><pre><code class="language-js">import { quadInOut } from  &quot;svelte/easing&quot;;
+</code></pre><pre><code class="language-html">&lt;path
+	transition:draw={{ duration: 5000, delay: 0, easing: quadInOut }}
+	d={path(data)}
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fi3oskspth8ittcaixmn.gif" class="kg-image" alt="Maps with D3 and Svelte" loading="lazy"></figure><p>Personally I think that&apos;s just awesome &#x1F680;. Here&apos;s the final code.</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/b4fc9a3eacc006ea5e5e20bb8f2c56d4.js"></script><!--kg-card-end: html--><p>Well that&apos;s it for today. Hope you have a nice day!</p>]]></content:encoded></item><item><title><![CDATA[Line Chart with Svelte and D3]]></title><description><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart type in the course is a line-chart based on San Francisco temperature data, available <a href="https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv">here</a>. We will use</p>]]></description><link>https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/</link><guid isPermaLink="false">61b2d84d94d8781c718bf3cc</guid><category><![CDATA[Javascript]]></category><category><![CDATA[Svelte]]></category><dc:creator><![CDATA[Anup Joseph]]></dc:creator><pubDate>Fri, 10 Dec 2021 04:39:30 GMT</pubDate><media:content url="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" medium="image"/><content:encoded><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><img src="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" alt="Line Chart with Svelte and D3"><p>The next chart type in the course is a line-chart based on San Francisco temperature data, available <a href="https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv">here</a>. We will use the <a href="https://dev.to/anupjoseph/make-a-scatter-plot-with-svelte-and-d3-56md">scatter plot</a> code from the last chart <a href="https://gist.github.com/AnupJoseph/27a5f91d4a1ae6fae0b51cbe4394debd">here</a>. Some interesting things about the dataset , its temporal in nature so the chart type must be able to show that change properly.</p><p>The <code>row</code> function in the last post is note very useful here. &#xA0;Lets convert the <code>temperature</code> column in to numbers. Also one of the columns is a timestamp so let&apos;s use the JS <code>Date</code> constructor to handle that.</p><pre><code class="language-js">const  row  =  function  (data)  {
+	data.temperature  =  +data.temperature;
+	data.timestamp  =  new  Date(data.timestamp);
+	return data;
+};
+
+onMount(async  ()  =&gt; {
+	dataset  =  await  csv(
+&quot;https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv&quot;,
+	row).then((data)  =&gt; {
+		return  data;
+	});
+});
+</code></pre><p>I want to plot temperature on the Y-axis and timestamp on X-axis.Since X-axis is a timestamp we are going to use <code>scaleTime</code> from D3. I am going to modify the scales accordingly</p><pre><code class="language-js">$: xScale  =  scaleTime()
+	.domain(extent(dataset, (d)  =&gt;  d.timestamp))
+	.range([0, innerWidth]);
+
+$: yScale  =  scaleLinear()
+	.domain(extent(dataset, (d)  =&gt;  d.temperature))
+	.range([innerHeight, 0]);
+</code></pre><p>Let&apos;s just pass the temperature and timestamp points to these scales in the scatter plot logic we had before. The <code>Axis</code> doesn&apos;t need to be changed. Let&apos;s change the <code>circle</code> logic as follows:</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r=&quot;5&quot;
+	style=&quot;fill:firebrick&quot;
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qnnwadeu79yhvtahopul.png" class="kg-image" alt="Line Chart with Svelte and D3" loading="lazy"></figure><p>Now we just need to connect these points. And it just so happens that D3 has a function to do exactly that. The <code>line</code> function in D3 gives a path provided a set of points. We can also specify the <code>curveNatural</code> to the line function.</p><pre><code class="language-js">$: line_gen  =  line()
+	.curve(curveNatural)
+	.x((d)  =&gt;  xScale(d.timestamp))
+	.y((d)  =&gt;  yScale(d.temperature))(dataset);
+</code></pre><p>Let&apos;s add this line as a path element to the svg <code>&lt;g&gt;</code> element. And style it as well so that it shows up as a line and not a closed path.</p><pre><code class="language-html">&lt;path  d={line_gen} /&gt;
+&lt;style&gt;
+	path {
+		fill: transparent;
+		stroke: rgb(18, 153, 90);
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n3h9dqay0hzq4oz81ju.png" class="kg-image" alt="Line Chart with Svelte and D3" loading="lazy"></figure><p><br>Yeah, I am not a fan of those red dots either. The line probably needs to be a bit thicker as well. Similarly we need to change the format of the ticks in the bottom axis. There are a few other stylistic changes as well and I am going to do them in a single sweep. This is the final chart produced:<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u0cnb9t9s8bhcpntvuc7.png" class="kg-image" alt="Line Chart with Svelte and D3" loading="lazy"></figure><p>And here&apos;s the code for the same:</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/cf95b2e316352b0542d15860343a802b.js"></script><!--kg-card-end: html--><p>If you want a simple line chart or use a line chart as base for something else, then this is what you probably want. I actually want to go a bit deeper and achieve a sort of hand drawing like effect.</p><p>The property we need is <code>stroke-dasharray</code> and <code>stroke-dashoffset</code>. Think of it like so, instead of drawing a continous path, we are drawing a dashed path. However the dashes themselves are pretty big, as big as the path required for this data or more infact. Okay, rather than reading through that terrible explanation you can read through <a href="https://www.cassie.codes/">Cassie Evans</a> fantasic, interactive explanation <a href="https://www.cassie.codes/posts/creating-my-logo-animation/">here</a>.</p><p>I am setting the <code>stroke-dasharray</code> to a nice large number.<code>stroke-dashoffset</code> is set to 0.</p><pre><code class="language-css">path {
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+}
+</code></pre><p>Visually there&apos;s absolutely no difference. However the underlying changes allow us to create the animation. Let&apos;s do just that:</p><pre><code class="language-css">path {
+
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+	animation: draw 8.5s  ease;
+
+}
+@keyframes  draw {
+	from {
+		stroke-dashoffset: 4400;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+</code></pre><p>Initially the <code>stroke-dashoffset</code> is set at 4400. Hence the dash is outside the SVG &#xA0;as each dash is of 4400 as well. As the transition continues the dash slowly becomes visible in the SVG viewBox.<br></p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2wett8krjfsttselkwtx.gif" class="kg-image" alt="Line Chart with Svelte and D3" loading="lazy"></figure><p>Now I actually wanted ever so slightly more than this. I wanted to have the circles we had earlier to appear on the path as the line moves ahead. I was unable to recreate the effect perfectly, but the effect is still pleasing so here goes. I am using the <code>fly</code> transition from Svelte. Let&apos;s modify <code>circle</code> accordingly.</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r=&quot;3&quot;
+	in:fly={{ duration: 5000, delay: i  *  15 }}
+/&gt;
+</code></pre><p>And this is the chart produced by adding that code</p><figure class="kg-card kg-image-card"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xx6uzzsecit1wyofizeq.gif" class="kg-image" alt="Line Chart with Svelte and D3" loading="lazy"></figure><p>Beautiful!! I really like the teasing effect of the dots, appearing seeming at once all together yet seperate.</p><p>Here&apos;s the final code for the chart -</p><!--kg-card-begin: html--><script src="https://gist.github.com/AnupJoseph/c01fc809beadf44eec8f01b2e79dc9c3.js"></script><!--kg-card-end: html--><p>That&apos;s all for today! Have a nice day!</p>]]></content:encoded></item><item><title><![CDATA[Finding your path in Python]]></title><description><![CDATA[A short summary of bite-sized trciks to using paths in Python]]></description><link>https://anup-blog.netlify.app/finding-your-path-in-python/</link><guid isPermaLink="false">61b2d24994d8781c718bf319</guid><category><![CDATA[Python]]></category><dc:creator><![CDATA[Anup Joseph]]></dc:creator><pubDate>Fri, 10 Dec 2021 04:28:05 GMT</pubDate><media:content url="https://anup-blog.netlify.app/content/images/2021/12/path.jpeg" medium="image"/><content:encoded><![CDATA[<h2 id="see-what-i-did-there">See what I did there?</h2><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://miro.medium.com/max/1400/1*MZDuzME9ojFR86-WAv_UuA.jpeg" class="kg-image" alt="Finding your path in Python" loading="lazy"><figcaption>Literally the first result on Unsplash of the word path &#x2014; Photo by <a href="https://unsplash.com/@stephenleo1982?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" class="cd iz" target="_blank" rel="noopener ugc nofollow" style="box-sizing: inherit; color: inherit; text-decoration: underline; -webkit-tap-highlight-color: transparent;">Stephen Leonardi</a> on <a href="https://unsplash.com/s/photos/path?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" class="cd iz" target="_blank" rel="noopener ugc nofollow" style="box-sizing: inherit; color: inherit; text-decoration: underline; -webkit-tap-highlight-color: transparent;">Unsplash</a></figcaption></figure><img src="https://anup-blog.netlify.app/content/images/2021/12/path.jpeg" alt="Finding your path in Python"><p>Python&#x2019;s standard library has so much cool functionality in it that some of it inevitably gets missed. I think that&#x2019;s what happened to the <a href="https://docs.python.org/3/library/pathlib.html" rel="noopener ugc nofollow">pathlib</a>. Now don&#x2019;t get me wrong, I don&#x2019;t mean to say that pathlib is some esoteric, unknown library but neither is it the first think that most Python programmers would think of when handling paths(definitely string manipulation or <a href="https://docs.python.org/3/library/os.path.html" rel="noopener ugc nofollow">os.path</a>). So in this post let&#x2019;s explore this beautiful module a bit.</p><p>The pathlib module gathers all the tools you would need to work with paths in one convenient place and provides a very flexible object-oriented API to work with the same. Pathlib abstracts away unnecessary complexity of different operating system paths(the whole Window using \ and Mac and Linux using / thing) using the <a href="https://docs.python.org/3/library/pathlib.html#basic-use" rel="noopener ugc nofollow">Path API</a> but is flexible enough to give the access to different OS level API&#x2019;s using the <a href="https://docs.python.org/3/library/pathlib.html#pathlib.PosixPath" rel="noopener ugc nofollow">PosixPath</a> and <a href="https://docs.python.org/3/library/pathlib.html#pathlib.WindowsPath" rel="noopener ugc nofollow">WindowsPath</a> APIs.</p><h2 id="let%E2%80%99s-make-a-path">Let&#x2019;s make a Path</h2><p>Making a path in pathlib is pretty straightforward. It doesn&#x2019;t matter too much as to whether the string passed to Path is Windows based or Linux based path:</p><pre><code class="language-python">from pathlib import Path
+path = Path(&quot;files/file.txt&quot;)</code></pre><blockquote><em><em>From here on I am going to assume that Path is imported</em></em></blockquote><p>To construct a new path, we use the / operator. Say we had another folder on top of that files folder in above example. To construct that path we can simply use:</p><pre><code class="language-python">new_path = &quot;all_files&quot;/path</code></pre><p>So long as at least one of the operands to the / operator is a Path object this works.</p><hr><h2 id="some-basic-uses">Some Basic Uses</h2><p>A very common usecase for paths is to pick out the file extensions and name of the file to which the path leads to. Some of the workarounds I have seen and used to get this done include:</p><pre><code class="language-python">simple_path = &quot;all_files/files/file.txt&quot;
+
+# To get the full file name
+simple_path.rsplit(&quot;/&quot;)[-1]
+
+# To get the extension
+simple_path.split(&quot;.&quot;)[1]
+
+# This of course work under the assumption that no one will be monstrous enough to put a . in the folder name(of course they won&apos;t says .git). To make it more umm... robust you could do
+simple_path.rsplit(&quot;/&quot;)[-1].split(&quot;.&quot;)[1]
+
+# To get just the file name
+simple_path.rsplit(&quot;/&quot;)[-1].split(&quot;.&quot;)[0]</code></pre><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://anup-blog.netlify.app/content/images/2021/12/image.png" class="kg-image" alt="Finding your path in Python" loading="lazy" width="960" height="960" srcset="https://anup-blog.netlify.app/content/images/size/w600/2021/12/image.png 600w, https://anup-blog.netlify.app/content/images/2021/12/image.png 960w" sizes="(min-width: 720px) 720px"><figcaption>My God that&#x2019;s a lot of screenshots</figcaption></figure><p>Not quite obviously these aren&#x2019;t the only ways to do these operations in Python(keeeping in the spirit of the Zen of Python). We should have used <a href="https://docs.python.org/3/library/os.path.html#os.path.split" rel="noopener ugc nofollow">os.path.split</a> to ensure cross platform compatibility. This exactly the sort of case where pathlib shines. Replicating this in pathlib:</p><p>To get the full file name</p><pre><code class="language-python">path.name</code></pre><p>To get the extension:</p><pre><code class="language-python">path.suffix # Note this returns the extension with dot included</code></pre><p>And finally to get just the file name without extension</p><pre><code class="language-python">path.stem</code></pre><p>Pathlib has none of the verbosity or complications involved in the earlier examples. Your code remains clean, pretty and I&#x2019;d say more readable.And if you just want the string representation of the path you can simple use:</p><pre><code class="language-python">str(path)</code></pre><p>Similarly if you want to find the directory where a given files is that&#x2019;s pretty simple too:</p><pre><code class="language-python">path.parent
+&gt;&gt;&gt; PosixPath(&apos;files&apos;)</code></pre><p>Now this is arguably more trickier to pull off with os.path. Let&#x2019;s say you want all the parents of the path. If you just want the full path to the file, you can use this:</p><pre><code class="language-python">path.resolve()
+&gt;&gt;&gt; PosixPath(&apos;/content/files/file.txt&apos;)</code></pre><p>And if you want all the paths till root:</p><pre><code class="language-python">list(path.resolve().parents) 
+&gt;&gt;&gt; [PosixPath(&apos;/content/files&apos;), PosixPath(&apos;/content&apos;), PosixPath(&apos;/&apos;)]</code></pre><h2 id="iterating-matching-and-more">Iterating, Matching and More</h2><p>Another very common operation is to iterate through directories. Now pathlib does have a method called <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.iterdir" rel="noopener ugc nofollow">iterdir</a> to handle that, but I prefer to use the Path().glob technique. To iterate through all the files in a directory:</p><pre><code class="language-python">dir_path = Path(&quot;/content&quot;)
+for p in dir_path.glob(&quot;*&quot;):
+    print(p.name)
+# .config
+# sample_data</code></pre><p>If you wanted instead to recursively iterate through the directory instead i.e. go into each individual subdirectory and print all the paths in them, you can easily use glob to do that</p><pre><code class="language-python">for p in dir_path.glob(&quot;**/*&quot;):
+    print(p.name)
+# .config
+# sample_data
+# .last_update_check.json
+# gce
+# config_sentinel
+# configurations
+# .last_opt_in_prompt.yaml
+# .last_survey_prompt.yaml
+# active_config
+# logs
+# config_default
+# 2021.11.01
+# 13.34.28.082269.log
+# 13.34.35.080342.log
+# 13.34.08.637862.log
+# 13.34.55.836922.log
+# 13.34.55.017895.log
+# 13.33.47.856572.log
+# anscombe.json
+# README.md
+# mnist_test.csv
+# california_housing_test.csv
+# mnist_train_small.csv
+# california_housing_train.csv</code></pre><p>Now this is basically the glob module in Python meaning that all the functionality of glob is present here as well. So if want only the csv files in the directory we can simply do this</p><pre><code class="language-python">for p in dir_path.glob(&quot;**/*.csv&quot;):
+    print(p.name)
+# mnist_test.csv 
+# california_housing_test.csv 
+# mnist_train_small.csv
+# california_housing_train.csv</code></pre><p>This is an extremely small sampling of all the functionality present in pathlib. If you want a more indepth guide to pathlib, this <a href="https://realpython.com/" rel="noopener ugc nofollow">RealPython</a> guide might be of help:</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://realpython.com/python-pathlib/"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Python 3&#x2019;s pathlib Module: Taming the File System &#x2013; Real Python</div><div class="kg-bookmark-description">How to effectively work with file system paths in Python 3 using the new &#x201C;pathlib&#x201D; module in the standard library.</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://cdn.realpython.com/static/favicon.68cbf4197b0c.png" alt="Finding your path in Python"><span class="kg-bookmark-author">Real Python</span><span class="kg-bookmark-publisher">Real Python</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://files.realpython.com/media/Python-3s-pathlib-Module-Taming-the-File-System_Watermarked.074720b405b1.jpg" alt="Finding your path in Python"></div></a></figure><p>And if you want a set of recepies to plug and play in your own projects this giant list is probably what you are looking for:</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://miguendes.me/python-pathlib"><div class="kg-bookmark-content"><div class="kg-bookmark-title">Python pathlib Cookbook: 57+ Examples to Master It (2021)</div><div class="kg-bookmark-description">A mega tutorial to learn by example the idiomatic way to work with paths in Python 3 using the pathlib module.</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1611242155728/W3_BYVVVh.png" alt="Finding your path in Python"><span class="kg-bookmark-author">miguendes&apos;s blog</span><span class="kg-bookmark-publisher">Miguel Brito</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://hashnode.com/utility/r?url=https%3A%2F%2Fcdn.hashnode.com%2Fres%2Fhashnode%2Fimage%2Fupload%2Fv1635668736624%2FrDQJ_0jEp.png%3Fw%3D1200%26auto%3Dcompress%2Cformat%26format%3Dwebp%26fm%3Dpng" alt="Finding your path in Python"></div></a></figure><p>That&#x2019;s it for today! Hope you have a nice day.</p><blockquote><em><em>If you have any question feel free to drop me a line on <a href="https://www.linkedin.com/in/anup-joseph/" rel="noopener ugc nofollow">LinkedIn</a> or <a href="https://twitter.com/AnupJoseph8" rel="noopener ugc nofollow">Twitter</a>.</em></em></blockquote>]]></content:encoded></item><item><title><![CDATA[Make a scatter plot with Svelte and D3]]></title><description><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart in the series is a scatter plot based on the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Flowers Dataset</a>. I figured we could reuse</p>]]></description><link>https://anup-blog.netlify.app/make-a-scatter-plot-with-svelte-and-d3/</link><guid isPermaLink="false">61739751220c1814f0c9053f</guid><dc:creator><![CDATA[Anup Joseph]]></dc:creator><pubDate>Sat, 23 Oct 2021 05:06:23 GMT</pubDate><media:content url="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" medium="image"/><content:encoded><![CDATA[<blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><img src="https://anup-blog.netlify.app/content/images/2021/10/scatter-fixed.png" alt="Make a scatter plot with Svelte and D3"><p>The next chart in the series is a scatter plot based on the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Flowers Dataset</a>. I figured we could reuse a lot of the code from earlier examples than rewiriting everything from scratch. A properly cleaned version of the dataset by Curran is available <a href="https://gist.githubusercontent.com/curran/9e04ccfebeb84bcdc76c/raw/3d0667367fce04e8ca204117c290c42cece7fde0/iris.csv">here</a>.The dataset has four numerical columns namely <code>sepal_length,sepal_width,petal_length,petal_width</code> which we need to convert to numbers. Let&apos;s change the <code>row</code> and <code>onMount</code> functions to reflect this:<br></p><pre><code>const  row  =  function  (data)  {
     data.sepal_length  =  +data.sepal_length;
     data.sepal_width  =  +data.sepal_width;
     data.petal_length  =  +data.petal_length;

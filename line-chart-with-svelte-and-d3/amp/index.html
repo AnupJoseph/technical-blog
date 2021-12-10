@@ -4,34 +4,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>Opening Resnets</title>
+    <title>Line Chart with Svelte and D3</title>
 
-    <link rel="canonical" href="https://anup-blog.netlify.app/unlocking-resnets/" />
+    <link rel="canonical" href="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     
     <meta property="og:site_name" content="Explorations" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Opening Resnets" />
-    <meta property="og:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
-    <meta property="og:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
-    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
-    <meta property="article:published_time" content="2021-09-30T05:26:00.000Z" />
-    <meta property="article:modified_time" content="2021-12-10T04:47:43.000Z" />
-    <meta property="article:tag" content="Deep Learning" />
+    <meta property="og:title" content="Line Chart with Svelte and D3" />
+    <meta property="og:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart type in the course is a line-chart based on San Francisco temperature data, available here. We will use" />
+    <meta property="og:url" content="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
+    <meta property="og:image" content="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" />
+    <meta property="article:published_time" content="2021-12-10T04:39:30.000Z" />
+    <meta property="article:modified_time" content="2021-12-10T04:39:30.000Z" />
+    <meta property="article:tag" content="Javascript" />
+    <meta property="article:tag" content="Svelte" />
     
     <meta property="article:publisher" content="https://www.facebook.com/ghost" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Opening Resnets" />
-    <meta name="twitter:description" content="Step by step exploration on what happens to an image in Resnets Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - Deep Residual Learning for Image Recognition. Resnets effectively solves the vanishing gradient" />
-    <meta name="twitter:url" content="https://anup-blog.netlify.app/unlocking-resnets/" />
-    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" />
+    <meta name="twitter:title" content="Line Chart with Svelte and D3" />
+    <meta name="twitter:description" content="This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post here.The next chart type in the course is a line-chart based on San Francisco temperature data, available here. We will use" />
+    <meta name="twitter:url" content="https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/" />
+    <meta name="twitter:image" content="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Anup Joseph" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Deep Learning" />
+    <meta name="twitter:data2" content="Javascript, Svelte" />
     <meta name="twitter:site" content="@ghost" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="413" />
+    <meta property="og:image:width" content="921" />
+    <meta property="og:image:height" content="621" />
     
     <script type="application/ld+json">
 {
@@ -60,18 +61,18 @@
         "url": "https://anup-blog.netlify.app/author/anup/",
         "sameAs": []
     },
-    "headline": "Opening Resnets",
-    "url": "https://anup-blog.netlify.app/unlocking-resnets/",
-    "datePublished": "2021-09-30T05:26:00.000Z",
-    "dateModified": "2021-12-10T04:47:43.000Z",
+    "headline": "Line Chart with Svelte and D3",
+    "url": "https://anup-blog.netlify.app/line-chart-with-svelte-and-d3/",
+    "datePublished": "2021-12-10T04:39:30.000Z",
+    "dateModified": "2021-12-10T04:39:30.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "https://anup-blog.netlify.app/content/images/2021/09/resnet.png",
-        "width": 1024,
-        "height": 413
+        "url": "https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png",
+        "width": 921,
+        "height": 621
     },
-    "keywords": "Deep Learning",
-    "description": "Step by step exploration on what happens to an image in Resnets\n\nResidual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu\nZhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - \nDeep Residual Learning for Image Recognition\n[https://arxiv.org/pdf/1512.03385.pdf]. Resnets effectively solves the vanishing\ngradient problem for deep networks and the ideas they introduced have been used\nin multiple architectures from there on. \n\nIn a recent assignment I w",
+    "keywords": "Javascript, Svelte",
+    "description": "&gt; This blog is second in a series of (unofficial) course notes for the Data\nVisualization with React and D3 series by Curran Kelleher. Read the introductory\nblog post here\n[https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07]\n.\nThe next chart type in the course is a line-chart based on San Francisco\ntemperature data, available here\n[https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv]\n. We",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://anup-blog.netlify.app/"
@@ -646,7 +647,7 @@
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-    
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
 
 </head>
 
@@ -661,30 +662,88 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Opening Resnets</h1>
+                <h1 class="post-title">Line Chart with Svelte and D3</h1>
                 <section class="post-meta">
                     Anup Joseph -
-                    <time class="post-date" datetime="2021-09-30">30 Sep 2021</time>
+                    <time class="post-date" datetime="2021-12-10">10 Dec 2021</time>
                 </section>
             </header>
             <figure class="post-image">
-                <amp-img src="https://anup-blog.netlify.app/content/images/2021/09/resnet.png" width="600" height="340" layout="responsive"></amp-img>
+                <amp-img src="https://anup-blog.netlify.app/content/images/2021/12/good-line-chart.png" width="600" height="340" layout="responsive"></amp-img>
             </figure>
             <section class="post-content">
 
-                <p><strong><em>Step by step exploration on what happens to an image in Resnets</em></strong></p><p>Residual Networks(Resnets from here on) were introduced by Kaiming He, Xiangyu Zhang, Shaoqing Ren and Jian Sun of Microsoft Research in their seminal paper - <a href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a>. Resnets effectively solves the vanishing gradient problem for deep networks and the ideas they introduced have been used in multiple architectures from there on. </p><p>In a recent assignment I was tasked with understanding how Resnets worked and present the same. I was curious to know what actually happened to an image in Resnet and tried to work out the same. This blog post is the result of that experiment and tries to illustrate the various calculations that happen inside the Resnet architecture.</p><p><em>Before we begin, I am almost certain that this article will have mistakes. I have tried my best to eliminate them. However if you do find any mistake please let me know in the comment or mail personally <a href="mailto:anup20joseph@gmail.com">here</a> and I will fix them as soon as possible.</em></p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Resnet architectures</figcaption></figure><p>The Resnet paper,  quite helpfully provides this diagram dividing the network into blocks and showing the output sizes of each block. However this picture might give idea that stride is common through the network from block 2 to 5, which is not the case. We also need to look at the Resnet 34 network given in the paper.</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Resnet 34 architecture with residual connections</figcaption></figure><p>This image adds crucial information about strides missing in the earlier image. However this does not have the concise block structures of the earlier image, so I suggest to keep them both at hand. There is one more important bit of information useful in computing the image size. The paper expresses this as </p><p><em>we use identity mapping for all shortcuts and zero-padding for increasing dimensions.</em></p><p>However, I feel that this bit of Python in the (old)Tensorflow implementation of Resnet is a bit more helpful.</p><pre><code class="language-python">padding=('SAME' if strides == 1 else 'VALID')</code></pre><p>This acts as a nice rule for computing through the architecture after block 1 without having to think it through every time. For people wondering what is <em>padding="SAME" </em>and <em>padding="VALID" </em>try this <a href="https://stackoverflow.com/questions/37674306/what-is-the-difference-between-same-and-valid-padding-in-tf-nn-max-pool-of-t">link</a>. Armed with all that info, lets get to work.</p><p>Input image size - (224,224,3)</p><h3 id="block-1-conv1">Block 1: conv1</h3><p>Layer 1: Convolution(filters=64, kernel_size=7x7, strides=2)</p><p>To calculate the output size in a convolution layer we use this formula:</p><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 542 80" width="542" height="80">
-  
-  
-  <defs>
-    
-  </defs>
-  <rect x="0" y="0" width="542" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 155 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">input - kernel_size + 2*padding</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 158.86764805005396 0.6714253277797297)"><path d="M-0.1 0.54 C53.29 0.71, 266.12 0.33, 319.35 0.37 M-1.61 -0.23 C51.73 0.16, 265.21 1.21, 318.58 1.57" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(504 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">+ 1</text></g><g transform="translate(318 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">stride</text></g></svg><p>For the first input the above rule does not apply instead the padding is 2.</p><p>Output size = (224 - 7 + 2 * 2) / 2 + 1 = 111.5 ≈ 112.															</p><p>Final output size of this block = (112x112x64)</p><h3 id="block-2-conv2x">Block 2: conv2_x</h3><p>Layer 1: Maxpool(kernel_size=3x3, strides=2)</p><p>To calculate the output size in a maxpool layer we use this formula</p><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 407 80" width="407" height="80">
-  
-  
-  <defs>
-    
-  </defs>
-  <rect x="0" y="0" width="407" height="80" fill="#ffffff"></rect><g transform="translate(10 20) rotate(0 76.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">output_size = </text></g><g transform="translate(171 10) rotate(0 91.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">input - kernel_size</text></g><g stroke-linecap="round"><g transform="translate(167 35) rotate(0 96.54208162748716 0.4570427794335501)"><path d="M-0.1 0.54 C32.51 0.64, 162.25 -0.03, 194.7 -0.06 M-1.61 -0.23 C30.96 0.08, 161.33 0.85, 193.93 1.14" stroke="#000000" stroke-width="1" fill="none"></path></g></g><g transform="translate(369 24) rotate(0 14 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">+ 1</text></g><g transform="translate(218 45) rotate(0 28.5 12.5)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space:pre" direction="ltr">stride</text></g></svg><p>Output size = (112 - 3) / 2+ 1 = 56																				</p><p>Output size = (56x56x64)</p><p>Layer 2: Convolution(filters=64, kernel_size=3x3, strides=1)</p><p>Output size = (56 - 3 + 2 x 1 ) / 1 + 1 = 55.5 ≈ 56</p><p>Output size = (56x6x64)</p><p>There are 5 more Convolution(filters=64, kernel_size=3x3, strides=1) layers. As you can see from the above calculation this does not downsample the image and hence the output size remains the size. Hence the output from this block is (56x56x64).</p><h3 id="block-3-conv3x">Block 3: conv3_x</h3><p>Layer 1: Convolution(filters=128, kernel_size=3x3, strides=2)</p><p>Output size = (56 - 3 + 2 x 0) / 2 + 1 = 27.5 ≈ 28</p><p>Output size = (28x28x128)</p><p>Layer 2: Convolution(filters=128, kernel_size=3x3, strides=1)</p><p>Output size = (28 - 3 + 2 x 1) / 1 + 1 = 28</p><p>Output size = (28x28x128)</p><p>There are 6 more Convolution(filters=128, kernel_size=3x3, strides=1) layers. Again this does not downsample the image and hence the output size remains the size. Hence the output from this block is (28x28x128).</p><h3 id="block-4-conv4x">Block 4: conv4_x</h3><p>Layer 1: Convolution(filters=256, kernel_size=3x3, strides=2)</p><p>Output size = (28 - 3 + 2 x 0) / 2 + 1 = 13.5 ≈ 14</p><p>Output size = (14x14x256)</p><p>Layer 2: Convolution(filters=256, kernel_size=3x3, strides=1)</p><p>Output size = (14 - 3 + 2 x 1) / 1 + 1 = 14</p><p>Output size = (14x14x256)</p><p>There are 10 more Convolution(filters=256, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (14x14x256).</p><h3 id="block-5-conv5x">Block 5: conv5_x</h3><p>Layer 1: Convolution(filters=512, kernel_size=3x3, strides=2)</p><p>Output size = (14 - 3 + 2 x 0) / 2 + 1 = 6.5 ≈ 7</p><p>Output size = (7x7x512)</p><p>Layer 2: Convolution(filters=512, kernel_size=3x3, strides=1)</p><p>Output size = (7 - 3 + 2x1)/1 +1 = 7</p><p>Output size = (7x7x512)</p><p>There are 4 more Convolution(filters=512, kernel_size=3x3, strides=1) layers. And like above the output size remains the same. So final output size = (7x7x512).</p><h3 id="block-5-conv5x-1">Block 5: conv5_x</h3><p>Global average pool is essentially a large classifier which converts the 7x7x512 layer into 1x1x1000 as the Resnet is trained on the ImageNet dataset which has a thousand classes.</p>
+                <blockquote>This blog is second in a series of (unofficial) course notes for the Data Visualization with React and D3 series by Curran Kelleher. Read the introductory blog post <a href="https://dev.to/learners/series-intro-data-visualization-with-svelte-and-d3-4c07">here</a>.</blockquote><p>The next chart type in the course is a line-chart based on San Francisco temperature data, available <a href="https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv">here</a>. We will use the <a href="https://dev.to/anupjoseph/make-a-scatter-plot-with-svelte-and-d3-56md">scatter plot</a> code from the last chart <a href="https://gist.github.com/AnupJoseph/27a5f91d4a1ae6fae0b51cbe4394debd">here</a>. Some interesting things about the dataset , its temporal in nature so the chart type must be able to show that change properly.</p><p>The <code>row</code> function in the last post is note very useful here.  Lets convert the <code>temperature</code> column in to numbers. Also one of the columns is a timestamp so let's use the JS <code>Date</code> constructor to handle that.</p><pre><code class="language-js">const  row  =  function  (data)  {
+	data.temperature  =  +data.temperature;
+	data.timestamp  =  new  Date(data.timestamp);
+	return data;
+};
+
+onMount(async  ()  =&gt; {
+	dataset  =  await  csv(
+"https://gist.githubusercontent.com/curran/60b40877ef898f19aeb8/raw/9476be5bd15fb15a6d5c733dd79788fb679c9be9/week_temperature_sf.csv",
+	row).then((data)  =&gt; {
+		return  data;
+	});
+});
+</code></pre><p>I want to plot temperature on the Y-axis and timestamp on X-axis.Since X-axis is a timestamp we are going to use <code>scaleTime</code> from D3. I am going to modify the scales accordingly</p><pre><code class="language-js">$: xScale  =  scaleTime()
+	.domain(extent(dataset, (d)  =&gt;  d.timestamp))
+	.range([0, innerWidth]);
+
+$: yScale  =  scaleLinear()
+	.domain(extent(dataset, (d)  =&gt;  d.temperature))
+	.range([innerHeight, 0]);
+</code></pre><p>Let's just pass the temperature and timestamp points to these scales in the scatter plot logic we had before. The <code>Axis</code> doesn't need to be changed. Let's change the <code>circle</code> logic as follows:</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r="5"
+	style="fill:firebrick"
+/&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qnnwadeu79yhvtahopul.png" class="kg-image" alt="Scatter plot of the timestamps" width="914" height="612" layout="responsive"></amp-img></figure><p>Now we just need to connect these points. And it just so happens that D3 has a function to do exactly that. The <code>line</code> function in D3 gives a path provided a set of points. We can also specify the <code>curveNatural</code> to the line function.</p><pre><code class="language-js">$: line_gen  =  line()
+	.curve(curveNatural)
+	.x((d)  =&gt;  xScale(d.timestamp))
+	.y((d)  =&gt;  yScale(d.temperature))(dataset);
+</code></pre><p>Let's add this line as a path element to the svg <code>&lt;g&gt;</code> element. And style it as well so that it shows up as a line and not a closed path.</p><pre><code class="language-html">&lt;path  d={line_gen} /&gt;
+&lt;style&gt;
+	path {
+		fill: transparent;
+		stroke: rgb(18, 153, 90);
+	}
+&lt;/style&gt;
+</code></pre><figure class="kg-card kg-image-card"><amp-img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n3h9dqay0hzq4oz81ju.png" class="kg-image" alt="Line chart" width="931" height="611" layout="responsive"></amp-img></figure><p><br />Yeah, I am not a fan of those red dots either. The line probably needs to be a bit thicker as well. Similarly we need to change the format of the ticks in the bottom axis. There are a few other stylistic changes as well and I am going to do them in a single sweep. This is the final chart produced:<br /></p><figure class="kg-card kg-image-card"><amp-img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u0cnb9t9s8bhcpntvuc7.png" class="kg-image" alt="Image description" width="921" height="621" layout="responsive"></amp-img></figure><p>And here's the code for the same:</p><p>If you want a simple line chart or use a line chart as base for something else, then this is what you probably want. I actually want to go a bit deeper and achieve a sort of hand drawing like effect.</p><p>The property we need is <code>stroke-dasharray</code> and <code>stroke-dashoffset</code>. Think of it like so, instead of drawing a continous path, we are drawing a dashed path. However the dashes themselves are pretty big, as big as the path required for this data or more infact. Okay, rather than reading through that terrible explanation you can read through <a href="https://www.cassie.codes/">Cassie Evans</a> fantasic, interactive explanation <a href="https://www.cassie.codes/posts/creating-my-logo-animation/">here</a>.</p><p>I am setting the <code>stroke-dasharray</code> to a nice large number.<code>stroke-dashoffset</code> is set to 0.</p><pre><code class="language-css">path {
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+}
+</code></pre><p>Visually there's absolutely no difference. However the underlying changes allow us to create the animation. Let's do just that:</p><pre><code class="language-css">path {
+
+	fill: transparent;
+	stroke: rgb(18, 153, 90);
+	stroke-width: 2.5;
+	stroke-linejoin: round;
+	stroke-dasharray: 4400;
+	stroke-dashoffset: 0;
+	animation: draw 8.5s  ease;
+
+}
+@keyframes  draw {
+	from {
+		stroke-dashoffset: 4400;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+</code></pre><p>Initially the <code>stroke-dashoffset</code> is set at 4400. Hence the dash is outside the SVG  as each dash is of 4400 as well. As the transition continues the dash slowly becomes visible in the SVG viewBox.<br /></p><figure class="kg-card kg-image-card"><amp-anim src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2wett8krjfsttselkwtx.gif" class="kg-image" alt="Line Chart" width="1294" height="640" layout="responsive"></amp-anim></figure><p>Now I actually wanted ever so slightly more than this. I wanted to have the circles we had earlier to appear on the path as the line moves ahead. I was unable to recreate the effect perfectly, but the effect is still pleasing so here goes. I am using the <code>fly</code> transition from Svelte. Let's modify <code>circle</code> accordingly.</p><pre><code class="language-html">&lt;circle
+	cx={xScale(data.timestamp)}
+	cy={yScale(data.temperature)}
+	r="3"
+	in:fly={{ duration: 5000, delay: i  *  15 }}
+/&gt;
+</code></pre><p>And this is the chart produced by adding that code</p><figure class="kg-card kg-image-card"><amp-anim src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xx6uzzsecit1wyofizeq.gif" class="kg-image" alt="Line chart with circles appearing GIF" width="1294" height="592" layout="responsive"></amp-anim></figure><p>Beautiful!! I really like the teasing effect of the dots, appearing seeming at once all together yet seperate.</p><p>Here's the final code for the chart -</p><p>That's all for today! Have a nice day!</p>
 
             </section>
 
